@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "price": 250,
+    "address": "11 rue de Fauboug",
+    "zipCode": "75010",
+    "country": "France",
+    "lat": 1450001,
+    "lng": 15340,
+    "createdDate": 1610571230986,
+    "name": "Studio de rêve"
+  },
+  {
+    "id": 2,
+    "price": 150,
+    "address": "18 rue de la bruyère",
+    "zipCode": "93800",
+    "country": "France",
+    "lat": 1450001,
+    "lng": 15340,
+    "createdDate": 1610571235888,
+    "name": "Appartement de luxe"
+  },
+  {
+    "id": 3,
+    "price": 50,
+    "address": "15 rue de la roquette",
+    "zipCode": "75011",
+    "country": "France",
+    "lat": 1450001,
+    "lng": 15340,
+    "createdDate": 1613424426148,
+    "name": "Appartement de fonction"
+  },
+  {
+    "name": "Studio pour les amoureux",
+    "price": "199",
+    "address": "11 rue des bougard",
+    "zipCode": "95100",
+    "country": "France",
+    "createdDate": 1630662101273,
+    "id": "2335aa5e-de43-494c-888f-bde795b1e408",
+    "lat": "11111",
+    "lng": "1111"
+  },
+  {
+    "name": "New appartement",
+    "price": "150",
+    "address": "11",
+    "zipCode": "95100",
+    "country": "fr",
+    "createdDate": 1630662904060,
+    "id": "12b3faa6-3dce-464a-ae08-e660bbaaad99",
+    "lat": "11111",
+    "lng": "1111"
+  },
+  {
+    "name": "Appartement 2",
+    "price": "100",
+    "address": "11",
+    "zipCode": "11",
+    "country": "fr",
+    "createdDate": 1630663700843,
+    "id": "cc104cb9-24a3-4cd4-9339-66da58445bbc",
+    "lat": "11111",
+    "lng": "1111"
+  },
+  {
+    "name": "Appartement 3",
+    "price": "190",
+    "address": "11 rue des neuves",
+    "zipCode": "95100",
+    "country": "France",
+    "createdDate": 1630664347802,
+    "id": "d84ebf7e-7b03-40d7-8888-f8694dd3d309",
+    "lat": "11111",
+    "lng": "1111"
+  },
+  {
+    "name": "ddd",
+    "price": "10",
+    "address": "10",
+    "zipCode": "10",
+    "country": "10",
+    "createdDate": 1630665259532,
+    "id": "07ec5127-4d79-48f4-bf42-9d9786fd7a31",
+    "lat": "11111",
+    "lng": "1111"
+  },
+  {
+    "name": "ddd",
+    "price": "10",
+    "address": "10",
+    "zipCode": "10",
+    "country": "10",
+    "createdDate": 1630665452409,
+    "id": "866d03db-0728-405f-ade9-35f29fd988f3",
+    "lat": "11111",
+    "lng": "1111"
+  }
+]
