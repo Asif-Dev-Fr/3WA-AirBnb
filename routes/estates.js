@@ -6,12 +6,14 @@ const Estate = require('../models/Estate');
 
 
 const path = require("path");
+const {addEstate} = require("../controllers/estates");
 
 router.get("/add-estate", (req, res, next) => {
   res.render("form");
 });
 
-router.post("/add-estate", (req, res, next) => {
+router.post("/add-estate", addEstate);
+/* router.post("/add-estate", (req, res, next) => {
   console.log(req.body);
   fs.readFile(path.join(__dirname, '../dataJson/estates.json'), "utf8", (err, data) => {
     if (err) return res.status(500).send("Something went wrong");
@@ -40,6 +42,6 @@ router.post("/add-estate", (req, res, next) => {
       res.status(201).send("Card created succesfully");
     });
   });
-});
+}); */
 
 module.exports = router;

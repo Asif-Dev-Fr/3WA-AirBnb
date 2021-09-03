@@ -16,5 +16,5 @@ app.use('/', homepageRouter)
 app.use("/admin", estatesRouter)
 
 app.listen(PORT, () => {
-  console.log(`Server running at port : ${PORT}`);
+  console.log(`Server running at port : ${PORT} address : http://localhost:${PORT}/`);
 });

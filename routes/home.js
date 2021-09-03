@@ -3,8 +3,8 @@ const router = express.Router();
 const fs = require("fs");
 const path = require("path");
 
-const homeController = require("../controllers/home");
+const {getEstates} = require("../controllers/home");
+router.get("/", getEstates);
 
-router.get("/", homeController);
 
 module.exports = router

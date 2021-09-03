@@ -1,4 +1,6 @@
 const fs = require("fs");
+const { v4: uuidv4 } = require("uuid");
+const path = require("path");
 module.exports = class Estate {
   constructor({ name, address, zipCode, country, createdDate, id, lat, lng }) {
     this.name = name;
@@ -13,16 +15,42 @@ module.exports = class Estate {
   // new Product({obj})
 
   save() {
-    estates.push(this);
+    console.log('THIS', this)
+    const requestBody = this
+    fs.readFile(path.join(__dirname, '../dataJson/estates.json'), "utf8", (err, data) => {
+    
+    let estateObj = []
+    estateObj = JSON.parse(data);
+   
+    const currentTime = Date.now();
+    const id = uuidv4();
+
+    let newEstateObj = {
+      ...requestBody,
+      createdDate: currentTime,
+      id,
+      lat: "11111",
+      lng: "1111",
+    };
+
+    estateObj.push(newEstateObj);
+
+
+    const newData = JSON.stringify(estateObj, null, 2);
+
+    fs.writeFile(path.join(__dirname, '../dataJson/estates.json'), newData, (err) => {
+      if (err) console.log('ERREUR !', err)
+    });
+  });
   }
 
-  static fetchAll() {
-    fs.readFile(
-      path.join(__dirname, "../dataJson/estates.json"),
-      (err, result) => {
-        if (err) return console.log(err);
-        return result;
-      }
-    );
+  static fetchAll = () => {
+    
+    const estates = fs.readFileSync(path.join(__dirname, "../dataJson/estates.json"))
+
+    return JSON.parse(estates)
+
   }
+    
+    
 };
