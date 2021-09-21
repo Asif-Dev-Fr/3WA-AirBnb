@@ -5,3 +5,4 @@ exports.addEstate = (req, res, next) => {
     estate.save()
     res.status(302).redirect('/');
 }
+

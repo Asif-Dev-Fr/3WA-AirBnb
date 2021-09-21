@@ -1,6 +1,7 @@
 const Estate = require('../models/Estate')
 
-exports.getEstates = (req, res, next) => {
-    const estates = Estate.fetchAll();
+exports.getEstates = async (req, res, next) => {
+    const estates = await Estate.find();
+    console.log(estates);
     res.render('homepage.ejs', { estates: estates })
 }
