@@ -12,21 +12,18 @@ module.exports = class Estate {
     this.lat = lat;
     this.lng = lng;
   }
-  // new Product({obj})
 
   save() {
-    console.log('THIS', this)
-    const requestBody = this
     fs.readFile(path.join(__dirname, '../dataJson/estates.json'), "utf8", (err, data) => {
-    
+
     let estateObj = []
     estateObj = JSON.parse(data);
-   
+
     const currentTime = Date.now();
     const id = uuidv4();
 
     let newEstateObj = {
-      ...requestBody,
+      ...this,
       createdDate: currentTime,
       id,
       lat: "11111",
@@ -34,7 +31,6 @@ module.exports = class Estate {
     };
 
     estateObj.push(newEstateObj);
-
 
     const newData = JSON.stringify(estateObj, null, 2);
 
@@ -45,12 +41,7 @@ module.exports = class Estate {
   }
 
   static fetchAll = () => {
-    
     const estates = fs.readFileSync(path.join(__dirname, "../dataJson/estates.json"))
-
     return JSON.parse(estates)
-
   }
-    
-    
 };

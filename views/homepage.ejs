@@ -1,32 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Homepage</title>
-</head>
+  </head>
 
-<body>
-        <nav>
-            <a href="/">Shop</a>
-            <!-- <a href="/admin/add-product">Admin</a> -->
-        </nav>
-        <h1>Bienvenue dans votre site de réservation</h1>
-        <h3>
-            <% if (estates.length >0)  { %>
-                <%for (let estate of estates){ %>
-                    <h5>
-                        <%= estate.id %>
-                    </h5>
-                    <%}%>
-                        <%} else { %>
-                            <p> Not Allowed </p>
-                            <% } %>
-
-        </h3>
-
-</body>
-
+  <body>
+    <nav>
+      <!-- <a href="/">Shop</a> -->
+      <a href="/admin/add-estate">Add estate</a>
+    </nav>
+    <h1>Bienvenue dans votre site de réservation</h1>
+    <h3>
+      <% if (estates.length >0) { %> <%for (let estate of estates){ %>
+				<h5><%= estate.name %></h5>
+				<%}%> <%} else { %>
+				<p>Not Allowed</p>
+      <% } %>
+    </h3>
+  </body>
 </html>
