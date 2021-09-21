@@ -18,6 +18,7 @@ const EstateSchema = new mongoose.Schema({
 });
 
 const Estate = mongoose.model('Estate', EstateSchema );
+
 module.exports = Estate;
 
 // const fs = require("fs");

@@ -10,10 +10,6 @@
 
 <body>
     <h1> Edit estate ejs</h1>
-    <nav>
-        <!-- <a href="/">Shop</a>
-        <a href="/admin/add-product">Admin</a> -->
-    </nav><br><br>
     <form method="POST" action="/admin/update-estate/<%= data._id %>">
         <input name="name" type="text"  placeholder="name" value="<%= data.name %>">
         <input name="price" type="number" value="<%= data.price %>" placeholder="price">
