@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const EstateSchema = new mongoose.Schema({
   name: String,
   address: String,
+  price: Number,
   zipCode: String,
   country: String,
   createdAt: { type: Date, default: new Date() },

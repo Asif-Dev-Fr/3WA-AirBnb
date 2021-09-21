@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Homepage</title>
-</head>
+  </head>
   <body>
     <nav>
       <!-- <a href="/">Shop</a> -->
@@ -14,9 +14,23 @@
     <h1>Bienvenue dans votre site de réservation</h1>
     <h3>
       <% if (estates.length >0) { %> <%for (let estate of estates){ %>
-				<h5><%= estate.name %></h5>
-				<%}%> <%} else { %>
-				<p>Not Allowed</p>
+      <div>
+        <h5><%= estate %></h5>
+        <div style="display: flex; flex-direction: row; justify-content: center;">
+          <!-- <form method="POST" action=<%="/admin/update-estate/" + estate._id   %> >
+            <button>Modifier</button>
+          </form> -->
+          <!-- <form method="POST" action=<%="/admin/delete-estate/" + estate._id   %> >
+            <button>Supprimer</button>
+          </form> -->
+          <a href="/admin/edit-estate/<%= estate._id %>"><button>Modifier</button></a>
+
+          <a href="/admin/delete-estate/<%= estate._id %>"><button>Supprimer</button></a>
+
+        </div>
+      </div>
+      <%}%> <%} else { %>
+      <p>Not Allowed</p>
       <% } %>
     </h3>
   </body>
