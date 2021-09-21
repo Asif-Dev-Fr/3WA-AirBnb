@@ -12,8 +12,8 @@ exports.removeEstate = async (req, res) => {
 }
 
 exports.editEstate = async (req, res) => {
-    const data = await Estate.findOne({ _id: req.params.id });
-    res.status(302).render("editForm", {data})
+    const estate = await Estate.findOne({ _id: req.params.id });
+    res.status(302).render("form", {estate})
 }
 
 exports.updateEstate = async (req, res) => {

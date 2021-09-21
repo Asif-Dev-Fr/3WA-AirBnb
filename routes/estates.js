@@ -7,7 +7,7 @@ const {updateEstate} = require("../controllers/estates");
 const router = express.Router();
 
 router.get("/add-estate", (req, res, next) => {
-  res.render("form");
+  res.render("form", {estate: false});
 });
 
 router.post("/add-estate", addEstate);
