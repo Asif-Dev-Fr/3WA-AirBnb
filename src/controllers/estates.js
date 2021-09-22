@@ -1,7 +1,7 @@
 const Estate = require('../models/Estate')
 
-exports.addEstate = async (req, res, next) => {
-    const estate = await new Estate(req.body)
+exports.addEstate = async (req, res) => {
+    const estate = await new Estate({...req.body, photos: req.files.map(file => file.path)})
     estate.save()
     res.status(302).redirect('/');
 }
