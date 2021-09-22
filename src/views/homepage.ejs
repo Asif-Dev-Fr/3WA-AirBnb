@@ -12,14 +12,9 @@
       rel="stylesheet"
     />
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
+    <script src="/map.js"></script>
+
     <title><%= title %></title>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-      }
-      /* #map { position: absolute; top: 0; bottom: 0; width: 10%; } */
-    </style>
   </head>
 
   <body>
@@ -49,18 +44,28 @@
         <% } %>
       </h3>
       <div>
-        <div style="width: 400px; height: 400px; border-radius: 12px;" id="map"></div>
+        <div
+          style="width: 400px; height: 400px; border-radius: 12px"
+          id="map"
+        ></div>
       </div>
     </div>
 
-    <script>
-      mapboxgl.accessToken = "pk.eyJ1Ijoicnl1LWp1IiwiYSI6ImNrdHZpemdxbTBrcHEycG1td3VycjVudGQifQ.a-gbraL7LSdPmys8SqB_-w";
+    <!-- <script src="public/map.js"></script> -->
+    <!-- <script>
+      // console.log(estates)
+      mapboxgl.accessToken =
+        "pk.eyJ1Ijoicnl1LWp1IiwiYSI6ImNrdHZpemdxbTBrcHEycG1td3VycjVudGQifQ.a-gbraL7LSdPmys8SqB_-w";
       const map = new mapboxgl.Map({
         container: "map", // container ID
         style: "mapbox://styles/mapbox/streets-v11", // style URL
         center: [2.25978638521092, 46.79052544169729], // starting position [lng, lat]
         zoom: 4, // starting zoom
       });
+
+      // Zoom option
+      const nav = new mapboxgl.NavigationControl();
+      map.addControl(nav, 'bottom-right');
 
       // Create a new marker.
       const marker = new mapboxgl.Marker({
@@ -69,6 +74,16 @@
       })
         .setLngLat([2.25978638521092, 46.79052544169729])
         .addTo(map);
-    </script>
+
+      // Add multiple Marker
+      // for (const { geometry, properties } of geojson.features) {
+      //   // create a HTML element for each feature
+      //   const el = document.createElement("div");
+      //   el.className = "marker";
+
+      //   // make a marker for each feature and add to the map
+      //   new mapboxgl.Marker(el).setLngLat(geometry.coordinates).addTo(map);
+      // }
+    </script> -->
   </body>
 </html>

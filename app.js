@@ -13,10 +13,12 @@ app.use(express.static('public'));
 const homepageRouter = require("./src/routes/home");
 const estatesRouter = require("./src/routes/estates")
 const usersRouter = require("./src/routes/users")
+const apiRouter = require("./src/routes/api")
 
 app.use('/', homepageRouter)
 app.use("/admin", estatesRouter)
 app.use("/user", usersRouter)
+app.use("/api", apiRouter)
 
 const CONNECTION_URL = "mongodb+srv://root:TcKbelPoLBtE859z@rbnb.ftcnl.mongodb.net/test";
 
