@@ -18,6 +18,7 @@
         <input name="address" type="text" placeholder="address">
         <input name="zipCode" type="text" placeholder="zipCode">
         <input name="country" type="text" placeholder="country">
+        <input name="photos" type="file" multiple="multiple">
         <button>Send</button>
     </form>
     <%} else { %>
@@ -28,6 +29,7 @@
         <input name="address" type="text" value="<%= estate.address %>" placeholder="address">
         <input name="zipCode" type="text" value="<%= estate.zipCode %>" placeholder="zipCode">
         <input name="country" type="text" value="<%= estate.country %>" placeholder="country">
+        <input name="photos" type="file" multiple="multiple">
         <button>Send</button>
     </form>
     <% } %>

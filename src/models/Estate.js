@@ -33,6 +33,7 @@ const EstateSchema = new mongoose.Schema({
       type: Number,
       default: 2.333333,
     },
+    photos: [String]
   },
   { timestamps: true }
 );
