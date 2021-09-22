@@ -1,21 +1,23 @@
 const mongoose = require("mongoose");
 
 const EstateSchema = new mongoose.Schema({
-  name: String,
-  address: String,
-  price: Number,
-  zipCode: String,
-  country: String,
-  createdAt: { type: Date, default: new Date() },
-  lat: {
-    type: Number,
-    default: 48.866667,
+    name: String,
+    address: String,
+    price: Number,
+    zipCode: String,
+    country: String,
+    // createdAt: { type: Date, default: new Date() },
+    lat: {
+      type: Number,
+      default: 48.866667,
+    },
+    lng: {
+      type: Number,
+      default: 2.333333,
+    },
   },
-  lng: {
-    type: Number,
-    default: 2.333333,
-  },
-});
+  { timestamps: true }
+);
 
 const Estate = mongoose.model('Estate', EstateSchema );
 
