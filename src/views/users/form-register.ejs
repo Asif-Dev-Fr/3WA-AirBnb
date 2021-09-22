@@ -1,23 +1,16 @@
-<!DOCTYPE html>
-<html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enregistrement</title>
-</head>
+<% title="Créer compte" %>
+<%- include('../partials/head', {title}); %>
 
 
 <body>
-    
-    <h1>Enregistrement</h1>
+    <h1>Créer un compte</h1>
     <form method="POST" action="user/register">
     <input name="firstName" type="text" placeholder="Prénom">
     <input name="lastName" type="text" placeholder="Nom">
-    <input name="password" type="password" placeholder="Mot de passe">
     <input name="email" type="email" placeholder="Email">
-        <input name="password" type="password" placeholder="Confirmation Mot de passe">
+    <input name="password" type="password" placeholder="Mot de passe">
+    <input name="password" type="password" placeholder="Confirmation Mot de passe">
     <button>Send</button>
     </form>
   
