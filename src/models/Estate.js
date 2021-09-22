@@ -1,12 +1,30 @@
 const mongoose = require("mongoose");
 
 const EstateSchema = new mongoose.Schema({
-    name: String,
-    address: String,
-    price: Number,
-    zipCode: String,
-    country: String,
-    // createdAt: { type: Date, default: new Date() },
+    name: {
+      type: String,
+      trim: true,
+      required: true
+    },
+    address: {
+      type: String,
+      trim: true,
+      required: true
+    },
+    price: {
+      type: Number,
+      required: true
+    },
+    zipCode: {
+      type: String,
+      trim: true,
+      required: true
+    },
+    country: {
+      type: String,
+      trim: true,
+      required: true
+    },
     lat: {
       type: Number,
       default: 48.866667,

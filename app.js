@@ -4,11 +4,13 @@ const PORT = 3000;
 const mongoose = require("mongoose");
 
 app.set("view engine", "ejs");
+app.set("views", "./src/views");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(express.static('public'));
 
-const homepageRouter = require("./routes/home");
-const estatesRouter = require("./routes/estates")
+const homepageRouter = require("./src/routes/home");
+const estatesRouter = require("./src/routes/estates")
 
 app.use('/', homepageRouter)
 app.use("/admin", estatesRouter)
