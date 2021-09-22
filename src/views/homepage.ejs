@@ -1,27 +1,74 @@
 <% title="Homepage" %>
-<%- include('./partials/head', {title}); %>
+<!-- <%- include('./partials/head', {title}); %> -->
 
-<body>
-  <nav>
-    <a href="/admin/add-estate">Ajouter établissement</a>
-    <a href="/user/register">Créer un compte utilisateur</a>
-  </nav>
-  <h1>Bienvenue dans votre site de réservation</h1>
-  <h3>
-    <% if (estates.length >0) { %>
-      <%for (let estate of estates){ %>
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
+    <title><%= title %></title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      /* #map { position: absolute; top: 0; bottom: 0; width: 10%; } */
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <a href="/admin/add-estate">Ajouter établissement</a>
+      <a href="/user/register">Créer un compte utilisateur</a>
+    </nav>
+    <h1>Bienvenue dans votre site de réservation</h1>
+    <div style="display: flex">
+      <h3 style="width: 70%">
+        <% if (estates.length >0) { %> <%for (let estate of estates){ %>
         <div>
           <h5><%= estate %></h5>
-          <div style="display: flex; flex-direction: row; justify-content: center">
-            <a href="/admin/edit-estate/<%= estate._id %>"><button>Modifier</button></a>
-            <a href="/admin/delete-estate/<%= estate._id %>"><button>Supprimer</button></a>
+          <div
+            style="display: flex; flex-direction: row; justify-content: center"
+          >
+            <a href="/admin/edit-estate/<%= estate._id %>"
+              ><button>Modifier</button></a
+            >
+            <a href="/admin/delete-estate/<%= estate._id %>"
+              ><button>Supprimer</button></a
+            >
           </div>
         </div>
-      <%}%>
-    <%} else { %>
-      <p>Not Allowed</p>
-    <% } %>
-  </h3>
-</body>
+        <%}%> <%} else { %>
+        <p>Not Allowed</p>
+        <% } %>
+      </h3>
+      <div>
+        <div style="width: 400px; height: 400px; border-radius: 12px;" id="map"></div>
+      </div>
+    </div>
 
+    <script>
+      mapboxgl.accessToken = "pk.eyJ1Ijoicnl1LWp1IiwiYSI6ImNrdHZpemdxbTBrcHEycG1td3VycjVudGQifQ.a-gbraL7LSdPmys8SqB_-w";
+      const map = new mapboxgl.Map({
+        container: "map", // container ID
+        style: "mapbox://styles/mapbox/streets-v11", // style URL
+        center: [2.25978638521092, 46.79052544169729], // starting position [lng, lat]
+        zoom: 4, // starting zoom
+      });
+
+      // Create a new marker.
+      const marker = new mapboxgl.Marker({
+        color: "#000000",
+        // draggable: true,
+      })
+        .setLngLat([2.25978638521092, 46.79052544169729])
+        .addTo(map);
+    </script>
+  </body>
 </html>
