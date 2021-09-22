@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-// const multer  = require('multer')
 const PORT = 3000;
 const mongoose = require("mongoose");
 
@@ -13,16 +12,6 @@ app.use(express.static(__dirname));
 const homepageRouter = require("./src/routes/home");
 const estatesRouter = require("./src/routes/estates")
 const usersRouter = require("./src/routes/users")
-
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, '/upload')
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, file.originalname)
-//   }
-// })
-// const upload = multer({ storage: storage })
 
 app.use('/', homepageRouter)
 app.use("/admin", estatesRouter)
