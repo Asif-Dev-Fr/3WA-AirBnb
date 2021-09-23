@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const {hashPassword, validatePassword} = require("../utils/password-utils")
 
 const User = require('../models/User');
 
@@ -8,8 +9,9 @@ exports.register = async (req, res) => {
     if(emailExist) return res.status(400).send('Email already exists !');
 
     //Hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    // const salt = await bcrypt.genSalt(10);
+    // const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    const hashedPassword = await hashPassword(req.body.password)
 
     const user = await new User({...req.body, password: hashedPassword, avatar: req.file.path});
     user.save();
@@ -28,8 +30,13 @@ exports.login = async (req, res) => {
     if(!userData) return res.status(400).send('Email doesn\'t exist !');
 
     // Check if password is correct :
-    const validPass = await bcrypt.compare(req.body.password, userData.password);
+    // const validPass = await bcrypt.compare(req.body.password, userData.password);
+    const validPass = await validatePassword(req.body.password, userData.password)
     if(!validPass) return res.status(400).send('Invalid password !');
-
-    res.status(302).redirect('/');
+    if(req.isAuthenticated()){
+        console.log(req.session);
+        res.status(302).redirect('/');
+    } else {
+        res.status(500).redirect('/login')
+    }
 }

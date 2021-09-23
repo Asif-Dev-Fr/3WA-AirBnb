@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require('passport')
 
 const { register, login } = require("../controllers/users")
 const upload = require("../utils/multer-init")
@@ -16,6 +17,12 @@ router.get("/login", (req, res) => {
   res.render("users/form-login");
 });
 
-router.post("/login", login)
+router.post("/login", passport.authenticate("local"), login);
+// router.post("/login", passport.authenticate("local"), (req, res)=> {
+
+// });
+// router.post("/login", passport.authenticate("local", { successRedirect: '/',
+// failureRedirect: '/login',
+// failureFlash: true }), login)
 
 module.exports = router;
