@@ -14,6 +14,7 @@
     <h1>Bienvenue dans votre site de réservation</h1>
     <% if(typeof user !== 'undefined') { %>
       <h1><%= user.firstName %></h1>
+      <% const isAdmin = user.role === 'admin' %>
     <% } %>
     <h3>
       <% if (estates.length >0) { %>
@@ -21,8 +22,10 @@
           <div>
             <h5><%= estate %></h5>
             <div style="display: flex; flex-direction: row; justify-content: center">
-              <a href="/admin/edit-estate/<%= estate._id %>"><button>Modifier</button></a>
-              <a href="/admin/delete-estate/<%= estate._id %>"><button>Supprimer</button></a>
+              <% if(typeof user !== 'undefined' && user.role === 'admin') { %>
+                <a href="/admin/edit-estate/<%= estate._id %>"><button>Modifier</button></a>
+                <a href="/admin/delete-estate/<%= estate._id %>"><button>Supprimer</button></a>
+              <% } %>
             </div>
           </div>
         <%}%>

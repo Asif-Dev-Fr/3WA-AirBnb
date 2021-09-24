@@ -1,4 +1,3 @@
-const bcrypt = require('bcryptjs');
 const { hashPassword, validatePassword } = require('../utils/password-utils');
 const { registerValidation, loginValidation } = require('../validation/validation');
 
@@ -37,9 +36,9 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   // Checking if the email exists in the database :
   const userData = await User.findOne({ email: req.body.email });
-  // if (!userData) return res.status(400).send("Email doesn't exist !");
+
 	if (!userData) {
-    req.flash('error', "Email doesn't exist!");
+    req.flash('error', "Email doesn't exist");
     return res.redirect('/user/register');
   }
 
@@ -55,9 +54,8 @@ exports.login = async (req, res) => {
     userData.password
   );
 
-  // if (!validPass) return res.status(400).send('Invalid password !');
 	if (!validPass) {
-    req.flash('error', "Wrong password");
+    req.flash('error', "Invalid password");
     return res.redirect('/user/login');
   }
 
