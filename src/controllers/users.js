@@ -63,6 +63,6 @@ exports.login = async (req, res) => {
     res.status(302).redirect('/');
     // res.status(302).redirect('/user/protected-route');
   } else {
-    res.status(500).redirect('/user/login');
+    res.status(302).redirect('/user/login');
   }
 };

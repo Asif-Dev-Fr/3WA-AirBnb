@@ -5,16 +5,19 @@
     <nav>
       <a href="/admin/add-estate">Ajouter établissement</a>
       <a href="/user/register">Créer un compte utilisateur</a>
-      <a href="/user/login">Se connecter</a>
-      <a href="/user/logout">Se deconnecter</a>
-      <% if(typeof user !== 'undefined') { %>
+      <% if(typeof currentUser !== 'undefined') { %>
+        <a href="/user/logout">Se deconnecter</a>
+      <% } else { %>
+        <a href="/user/login">Se connecter</a>
+      <% } %>
+      <% if(typeof currentUser !== 'undefined') { %>
         <a href="/user/profile">mon profile</a>
       <% } %>
     </nav>
     <h1>Bienvenue dans votre site de réservation</h1>
-    <% if(typeof user !== 'undefined') { %>
-      <h1><%= user.firstName %></h1>
-      <% const isAdmin = user.role === 'admin' %>
+    <% if(typeof currentUser !== 'undefined') { %>
+      <h1><%= currentUser.firstName %></h1>
+      <% const isAdmin = currentUser.role === 'admin' %>
     <% } %>
     <h3>
       <% if (estates.length >0) { %>
@@ -22,7 +25,7 @@
           <div>
             <h5><%= estate %></h5>
             <div style="display: flex; flex-direction: row; justify-content: center">
-              <% if(typeof user !== 'undefined' && user.role === 'admin') { %>
+              <% if(typeof currentUser !== 'undefined' && currentUser.role === 'admin') { %>
                 <a href="/admin/edit-estate/<%= estate._id %>"><button>Modifier</button></a>
                 <a href="/admin/delete-estate/<%= estate._id %>"><button>Supprimer</button></a>
               <% } %>

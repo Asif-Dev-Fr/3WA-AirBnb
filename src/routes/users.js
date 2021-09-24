@@ -20,7 +20,6 @@ router.post("/register", upload.single("avatar"), register);
 
 router.get("/login", (req, res) => {
   let message = req.flash();
-  // res.render("users/form-login");
   res.render("users/form-login", {
     message: message,
   });

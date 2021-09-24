@@ -21,14 +21,7 @@ exports.setUpProfile = async (req, res, next) => {
   if(!req.session.passport.user){
     next();
   } else {
-    const {firstName, lastName, email, role, isHouseOwner} = await User.findOne({_id: req.session.passport.user})
-    res.locals.user = {
-      firstName,
-      lastName,
-      email,
-      role,
-      isHouseOwner
-    };
+    res.locals.currentUser = req.user
     next();
   }
 }
