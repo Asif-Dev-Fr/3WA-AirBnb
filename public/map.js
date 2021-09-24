@@ -1,13 +1,10 @@
-// const mapboxgl  = require("mapbox-gl");
-// const Estate = require("../src/models/Estate");
-
 const initMap = async () => {
-  mapboxgl.accessToken = process.env.MAPBOX_TOKEN;
+  mapboxgl.accessToken = "pk.eyJ1Ijoicnl1LWp1IiwiYSI6ImNrdHZpemdxbTBrcHEycG1td3VycjVudGQifQ.a-gbraL7LSdPmys8SqB_-w";
   const map = new mapboxgl.Map({
     container: "map", // container ID
     style: "mapbox://styles/mapbox/streets-v11", // style URL
-    center: [2.25978638521092, 46.79052544169729], // starting position [lng, lat]
-    zoom: 4, // starting zoom
+    center: [2.25978638521092, 46.9952544169729], // starting position [lng, lat]
+    zoom: 4.4, // starting zoom
   });
 
   // Zoom option
@@ -27,10 +24,23 @@ const initMap = async () => {
   //   .addTo(map);
 
   // set multiple markers :
-  for (const { lat, lng } of estates) {
+  let latitude;
+  let longitude;
+  for (const { lat, lng, name, address, zipCode, price, _id } of estates) {
     // make a marker for each feature and add to the map
-    new mapboxgl.Marker({ color: "#000000" }).setLngLat([lng, lat]).addTo(map);
-  }
+    latitude = lat;
+    longitude = lng
+    const description = `<a style="color: black;" href="/estate/${_id}"><strong>${name}</strong> ${address} ${zipCode} ${price}€</a>`
+    const marker = new mapboxgl.Marker({ color: "#000000" }).setLngLat([lng, lat]).setPopup(new mapboxgl.Popup().setHTML(description)).addTo(map);
+    // const description = { name, address, zipCode, price };
+    // new mapboxgl.Popup()
+    // .setLngLat([lng, lat])
+    // .setHTML(description)
+    // .addTo(map);
+    marker.cl
+  };
+  
+  
 };
 
 window.addEventListener("load", initMap);

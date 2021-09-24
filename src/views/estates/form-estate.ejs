@@ -1,39 +1,145 @@
 <% title= !estate ? 'Add Estate' : 'Edit Estate' %>
-<%- include('../partials/head', {title}); %>
 
 <!DOCTYPE html>
 <html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
 
-<!-- <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= !estate ? 'Add Estate' : 'Edit Estate' %></title>
-</head> -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css"
+      type="text/css"
+    />
+    <title><%= title %></title>
+    <style>
+      #geocoder {
+        z-index: 1;
+        margin: 20px;
+      }
+      .mapboxgl-ctrl-geocoder {
+        min-width: 50%;
+      }
+    </style>
+  </head>
 
-
-<body>
+  <body>
     <% if (!estate) { %>
-    <h1> Add estate ejs</h1>
-    <form method="POST" action="/admin/add-estate">
-        <input name="name" type="text" placeholder="name">
-        <input name="price" type="number" placeholder="price">
-        <input name="address" type="text" placeholder="address">
+    <h1>Add estate ejs</h1>
+    <!-- <form method="POST" action="/admin/add-estate"> -->
+    <form id="form">
+      <input name="name" type="text" id="name" placeholder="name" />
+      <input name="price" type="number" id="price" placeholder="price" />
+      <!-- <input name="address" type="text" id="result2" placeholder="address">
         <input name="zipCode" type="text" placeholder="zipCode">
-        <input name="country" type="text" placeholder="country">
-        <button>Send</button>
+        <input name="country" type="text" placeholder="country"> -->
+      <div id="geocoder"></div>
+      <button>Send</button>
     </form>
+
+    <pre id="result"></pre>
     <%} else { %>
-    <h1> Edit estate ejs</h1>
-    <form method="POST" action="/admin/update-estate/<%= estate._id %>">
-        <input name="name" type="text"  placeholder="name" value="<%= estate.name %>">
-        <input name="price" type="number" value="<%= estate.price %>" placeholder="price">
-        <input name="address" type="text" value="<%= estate.address %>" placeholder="address">
-        <input name="zipCode" type="text" value="<%= estate.zipCode %>" placeholder="zipCode">
-        <input name="country" type="text" value="<%= estate.country %>" placeholder="country">
-        <button>Send</button>
+    <h1>Edit estate ejs</h1>
+    <!-- <form method="POST" action="/admin/update-estate/<%= estate._id %>"> -->
+    <form id="form" name="form">
+      <input
+        name="name"
+        id="name"
+        type="text"
+        placeholder="name"
+        value="<%= estate.name %>"
+      />
+      <input
+        name="price"
+        type="number"
+        value="<%= estate.price %>"
+        placeholder="price"
+      />
+      <input
+        name="address"
+        type="text"
+        value="<%= estate.address %>"
+        placeholder="address"
+      />
+      <input
+        name="zipCode"
+        type="text"
+        value="<%= estate.zipCode %>"
+        placeholder="zipCode"
+      />
+      <input
+        name="country"
+        type="text"
+        value="<%= estate.country %>"
+        placeholder="country"
+      />
+      <button id="submit">Send</button>
     </form>
     <% } %>
-</body>
+    <script src="/autocomplete.js"></script>
+    <script>
+      const form = document.getElementById("form");
+      if (form) {
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          console.log(e);
 
+          const name = document.getElementById("name").value;
+          const price = document.getElementById("price").value;
+          const fullAddress = document.querySelector(
+            ".mapboxgl-ctrl-geocoder--input"
+          ).value;
+
+          const obj = JSON.stringify({
+            name,
+            price,
+            fullAddress,
+          });
+
+            console.log(obj)  
+
+          await fetch("http://localhost:3000/admin/add-estate", {
+            method: "POST",
+            body: obj,
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          });
+          window.location.replace("http://localhost:3000/");
+        });
+      }
+    </script>
+    <!-- <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoicnl1LWp1IiwiYSI6ImNrdHZpemdxbTBrcHEycG1td3VycjVudGQifQ.a-gbraL7LSdPmys8SqB_-w';
+    const geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        types: 'country,region,place,postcode,locality,neighborhood',
+        queryOptions: {
+            country: "fr"
+        }
+    });
+     
+    geocoder.addTo('#geocoder');
+     
+    // Get the geocoder results container.
+    const results = document.getElementById('result');
+     
+    // Add geocoder result to container.
+    geocoder.on('result', (e) => {
+    results.innerText = JSON.stringify(e.result, null, 2);
+    });
+     
+    // Clear results container when search is cleared.
+    geocoder.on('clear', () => {
+    results.innerText = '';
+    });
+    </script> -->
+  </body>
 </html>

@@ -1,8 +1,6 @@
 const express = require("express");
-const {addEstate} = require("../controllers/estates");
-const {removeEstate} = require("../controllers/estates");
-const {editEstate} = require("../controllers/estates");
-const {updateEstate} = require("../controllers/estates");
+const {addEstate, removeEstate, editEstate, updateEstate} = require("../controllers/estates");
+
 
 const router = express.Router();
 

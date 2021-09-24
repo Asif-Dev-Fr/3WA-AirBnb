@@ -1,5 +1,5 @@
-<% title="Homepage" %>
-<!-- <%- include('./partials/head', {title}); %> -->
+<% title="Estate Description" %>
+<!-- <%- include('../partials/head', {title}); %> -->
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -19,32 +19,14 @@
 
   <body>
     <nav>
+      <a href="/">Accueil</a>
       <a href="/admin/add-estate">Ajouter établissement</a>
       <a href="/user/register">Créer un compte utilisateur</a>
     </nav>
-    <h1>Bienvenue dans votre site de réservation</h1>
+    <h1>Estate Description</h1>
     <div style="display: flex">
       <h3 style="width: 70%">
-        <% if (estates.length >0) { %> <%for (let estate of estates){ %>
-        <div>
-          <h5><%= estate %></h5>
-          <div
-            style="display: flex; flex-direction: row; justify-content: center"
-          >
-            <a href="/estate/<%= estate._id %>"
-              ><button>Voir</button></a
-            >
-            <a href="/admin/edit-estate/<%= estate._id %>"
-              ><button>Modifier</button></a
-            >
-            <a href="/admin/delete-estate/<%= estate._id %>"
-              ><button>Supprimer</button></a
-            >
-          </div>
-        </div>
-        <%}%> <%} else { %>
-        <p>Not Allowed</p>
-        <% } %>
+        <%= estate %>
       </h3>
       <div>
         <div
