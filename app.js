@@ -1,4 +1,5 @@
 // Packages import
+const flash = require('connect-flash');
 const express = require("express");
 const passport = require('passport');
 const path = require('path');
@@ -36,7 +37,7 @@ app.use(session({
   store: MongoStore.create({mongoUrl: process.env.CONNECTION_URL, collectionName: "sessions"})
 }));
 app.use((req, res, next) => {
-  console.log(res.app.locals);
+  // console.log(res.app.locals);
   next();
 })
 
@@ -60,6 +61,8 @@ mongoose.connect(process.env.CONNECTION_URL, {
 mongoose.connection.once('open', () => {
   console.log('Connected to MongoDB');
 });
+
+app.use(flash());
 
 /**
  * ---------- ROUTES ----------

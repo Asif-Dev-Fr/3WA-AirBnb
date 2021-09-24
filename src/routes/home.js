@@ -1,7 +1,7 @@
 const express = require('express');
 const {getEstates} = require("../controllers/home");
 
-const {isAuth,isAdmin,setUpProfile} = require("./authMiddleware");
+const {setUpProfile} = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 

@@ -3,19 +3,27 @@ const passport = require('passport');
 
 const { register, login } = require("../controllers/users");
 const upload = require("../utils/multer-init");
-const {isAuth,isAdmin,setUpProfile} = require("./authMiddleware")
+const {isAuth,isAdmin,setUpProfile} = require("../middlewares/authMiddleware")
 
 const router = express.Router();
 
 router.get("/register", (req, res) => {
-  res.render("users/form-register");
+  let message = req.flash();
+  res.render("users/form-register", {
+    message: message,
+  });
+  // res.render("users/form-register");
 });
 
 router.post("/register", upload.single("avatar"), register);
 
 
 router.get("/login", (req, res) => {
-  res.render("users/form-login");
+  let message = req.flash();
+  // res.render("users/form-login");
+  res.render("users/form-login", {
+    message: message,
+  });
 });
 
 router.post("/login", passport.authenticate("local"), login);

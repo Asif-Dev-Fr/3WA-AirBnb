@@ -6,12 +6,14 @@ const Joi = require('joi');
 const registerValidation = (data) => {
   const schema = Joi.object({
     firstName: Joi.string().min(2).max(30).required(),
-    lastName: Joi.string().min(5).max(255).required().email(),
+    lastName: Joi.string().min(2).max(30).required(),
+    email: Joi.string().email().min(5).max(255).required(),
     password: Joi.string().min(8).required(),
-    password_confirmation: Joi.any()
+    confirm_password: Joi.any()
 															.valid(Joi.ref('password'))
+                              .label('Confirm password')
+                              .messages({ 'any.only': '{{#label}} does not match' })
                             	.required()
-															.options({ language: { any: { allowOnly: 'must match password' } } })
   });
   return schema.validate(data);
 };
@@ -19,7 +21,7 @@ const registerValidation = (data) => {
 // Login Validation :
 const loginValidation = (data) => {
   const schema = Joi.object({
-    email: Joi.string().min(5).max(255).required().email(),
+    email: Joi.string().email().min(5).max(255).required(),
     password: Joi.string().min(8).required()
   });
   return schema.validate(data);
