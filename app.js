@@ -1,14 +1,31 @@
 const express = require("express");
 const app = express();
-const PORT = 3000;
+const chalk = require('chalk');
 const mongoose = require("mongoose");
+const path = require('path')
+const PORT = 3000;
+const expressLayouts = require('express-ejs-layouts');
 
-app.set("view engine", "ejs");
-app.set("views", "./src/views");
+// Body parser
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.static('public'));
 
+// Serve static files
+app.use(express.static(path.join(__dirname,'public')));
+app.use('/admin',express.static(path.join(__dirname,'public')));
+app.use('/user',express.static(path.join(__dirname,'public')));
+
+// Set view engine and default layout
+app.use(expressLayouts);
+app.set("view engine", "ejs");
+app.set("views", "./src/views");
+app.set('layout', './layouts/guest-layout')
+/*  To use another layout for one specific route place attribute in render
+res.render("estates/form-estate", {
+    layout: './layouts/admin-layout'
+  });  */
+
+// Router
 const homepageRouter = require("./src/routes/home");
 const estatesRouter = require("./src/routes/estates")
 const usersRouter = require("./src/routes/users")
@@ -17,6 +34,8 @@ app.use('/', homepageRouter)
 app.use("/admin", estatesRouter)
 app.use("/user", usersRouter)
 
+
+// MONGO BDD
 const CONNECTION_URL = "mongodb+srv://root:TcKbelPoLBtE859z@rbnb.ftcnl.mongodb.net/test";
 
 mongoose.connect(CONNECTION_URL, {
@@ -27,12 +46,12 @@ mongoose.connect(CONNECTION_URL, {
 // mongoose.set('useFindAndModify', false);
 
 mongoose.connection.once('open', () => {
-    console.log('Connected to MongoDB');
+    console.log(chalk.cyanBright('Connected to MongoDB'));
 });
 
 
 app.listen(PORT, () => {
-  console.log(`Server running at port : ${PORT} address : http://localhost:${PORT}/`);
+  console.log(chalk.bgBlue(`🌍 Server running at port ${PORT} address : http://localhost:${PORT}/`));
 });
 
 

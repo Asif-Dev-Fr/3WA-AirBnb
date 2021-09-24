@@ -1,0 +1,23 @@
+html, body, body>div {
+   min-height:100%;
+}
+
+body>div {
+   position:relative;
+}
+
+header {
+   min-height: 8rem;
+}
+
+footer {
+   position: absolute;
+   bottom:0;  
+}
+
+.banner {
+   background-image: url('../../images/banners/navi.jpg');
+   background-size: cover;
+   background-position-y: 38%;
+}
+

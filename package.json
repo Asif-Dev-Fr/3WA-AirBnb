@@ -5,18 +5,28 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "build:css": "postcss public/styles/tailwind.css -o public/styles/style.css",
+    "build:css:watch": "postcss public/styles/tailwind.css -o public/styles/style.css --watch"
   },
   "author": "Kassam ali Asif",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "chalk": "^3.0.0",
+    "nodemon": "^2.0.12",
+    "postcss-cli": "^8.3.1"
   },
   "dependencies": {
+    "autoprefixer": "^10.3.5",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.1",
     "joi": "^17.4.2",
     "mongoose": "^6.0.7",
+    "postcss": "^8.3.7",
+    "postcss-import": "^14.0.2",
+    "postcss-nesting": "^8.0.1",
+    "tailwindcss": "^2.2.15",
     "uuid": "^8.3.2"
   }
 }

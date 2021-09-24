@@ -1,28 +1,19 @@
-<% title= !estate ? 'Add Estate' : 'Edit Estate' %>
-<%- include('../partials/head', {title}); %>
-
-<!DOCTYPE html>
-<html lang="fr">
-
-<!-- <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= !estate ? 'Add Estate' : 'Edit Estate' %></title>
-</head> -->
 
 
-<body>
-    <% if (!estate) { %>
+
+    <% if (!isEdit) { %>
     <h1> Add estate ejs</h1>
     <form method="POST" action="/admin/add-estate">
-        <input name="name" type="text" placeholder="name">
-        <input name="price" type="number" placeholder="price">
-        <input name="address" type="text" placeholder="address">
-        <input name="zipCode" type="text" placeholder="zipCode">
-        <input name="country" type="text" placeholder="country">
-        <button>Send</button>
-    </form>
+        <input class="input" name="name" type="text" placeholder="name">
+        <input class="input" name="price" type="number" placeholder="price">
+        <input class="input" name="address" type="text" placeholder="address">
+        <input class="input" name="zipCode" type="text" placeholder="zipCode">
+        <input class="text-gray-800 border-2 border-gray-300 py-2 px-3 outline-none focus:border-3 focus:border-blue-500 shadow-inner focus:shadow-lg" name="country" type="text" placeholder="country">
+        <button class="btn-indigo">Envoyer</button>
+        <input class="btn-red" type="reset" value="Annuler" />
+        <button class="btn-round-icon"><i class="fas fa-search mx-auto"></i></button>
+        
+    </form> 
     <%} else { %>
     <h1> Edit estate ejs</h1>
     <form method="POST" action="/admin/update-estate/<%= estate._id %>">
@@ -31,9 +22,8 @@
         <input name="address" type="text" value="<%= estate.address %>" placeholder="address">
         <input name="zipCode" type="text" value="<%= estate.zipCode %>" placeholder="zipCode">
         <input name="country" type="text" value="<%= estate.country %>" placeholder="country">
-        <button>Send</button>
+        <button class="btn-indigo">Send</button>
     </form>
     <% } %>
-</body>
 
-</html>
+

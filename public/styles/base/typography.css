@@ -1,0 +1,8 @@
+
+.text-link {
+  @apply text-lg font-medium text-indigo-500
+}
+
+.text-link:hover {
+  @apply  text-xl font-bold text-indigo-700
+}

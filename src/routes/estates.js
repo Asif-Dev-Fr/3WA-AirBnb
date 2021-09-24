@@ -7,7 +7,14 @@ const {updateEstate} = require("../controllers/estates");
 const router = express.Router();
 
 router.get("/add-estate", (req, res, next) => {
-  res.render("estates/form-estate", {estate: false});
+  const isEdit = false
+  const title = "Ajout établissement"
+  // To use another layout--> attribute layout: './layout path'
+  res.render("estates/form-estate", {
+    isEdit,
+    title,
+    layout: './layouts/admin-layout'
+  });
 });
 
 router.post("/add-estate", addEstate);

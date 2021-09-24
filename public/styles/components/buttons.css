@@ -1,0 +1,32 @@
+
+.btn-indigo {
+  @apply whitespace-nowrap font-medium bg-indigo-500 text-white text-center py-2 px-5 rounded;
+}
+
+.btn-indigo:hover {
+  @apply bg-indigo-700 text-lg;
+}
+
+.btn-pink {
+  @apply whitespace-nowrap font-medium bg-pink-500 text-white text-center py-2 px-4 rounded;
+}
+
+.btn-pink:hover {
+  @apply bg-pink-700 text-lg;
+}
+
+.btn-red {
+  @apply whitespace-nowrap font-medium bg-red-500 text-white text-center py-2 px-4 rounded;
+}
+
+.btn-red:hover {
+  @apply bg-red-700 text-lg;
+}
+
+.btn-round-icon {
+  @apply whitespace-nowrap font-medium bg-indigo-500 text-white text-center py-2 px-4 rounded-full h-14 w-14 inline-flex items-center;
+}
+
+.btn-round-icon:hover {
+  @apply bg-indigo-700 text-lg ;
+}

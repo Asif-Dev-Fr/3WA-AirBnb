@@ -1,12 +1,10 @@
 const express = require("express");
 
-/* const {editEstate} = require("../controllers/estates");
-const {updateEstate} = require("../controllers/estates"); */
-
 const router = express.Router();
 
 router.get("/register",  (req, res, next) => {
-  res.render("users/form-register");
+  const title="Création compte"
+  res.render("users/form-register", { title });
 });
 
 // router.post("users/register/", register);

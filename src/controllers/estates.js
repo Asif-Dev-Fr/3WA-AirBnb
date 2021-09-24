@@ -13,7 +13,13 @@ exports.removeEstate = async (req, res) => {
 
 exports.editEstate = async (req, res) => {
     const estate = await Estate.findOne({ _id: req.params.id });
-    res.status(302).render("estates/form-estate", {estate})
+    const isEdit = true
+    const title = "Édition établissement"
+    res.status(302).render("estates/form-estate", {
+        estate,
+        isEdit,
+        title 
+    })
 }
 
 exports.updateEstate = async (req, res) => {
