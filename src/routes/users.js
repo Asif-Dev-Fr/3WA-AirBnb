@@ -18,11 +18,11 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", passport.authenticate("local"), login);
-// router.post("/login", passport.authenticate("local"), (req, res)=> {
 
-// });
-// router.post("/login", passport.authenticate("local", { successRedirect: '/',
-// failureRedirect: '/login',
-// failureFlash: true }), login)
+router.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    res.redirect('/');
+  });
+})
 
 module.exports = router;
