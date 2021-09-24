@@ -26,12 +26,10 @@ const strategy = new LocalStrategy(customFields, verifyCallback);
 passport.use(strategy);
 
 passport.serializeUser(function(user, done) {
-  console.log('serialiiize:' + user._id);
-  done(null, user._id);
+  done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
-  console.log('deserieliiize: ' + User.findById(id));
   User.findById(id, function(err, user) {
     done(err, user);
   });

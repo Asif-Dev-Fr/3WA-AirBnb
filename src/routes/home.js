@@ -1,6 +1,8 @@
 const express = require('express');
 const {getEstates} = require("../controllers/home");
 
+const {isAuth,isAdmin,setUpProfile} = require("./authMiddleware");
+
 const router = express.Router();
 
 // var auth = function (req, res, next) {
@@ -9,6 +11,6 @@ const router = express.Router();
 //   res.status(401).json("not authenticated!");
 // }
 
-router.get("/", getEstates);
+router.get("/", setUpProfile, getEstates);
 
 module.exports = router

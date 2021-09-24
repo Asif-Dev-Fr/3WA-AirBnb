@@ -26,8 +26,10 @@ exports.login = async (req, res) => {
     const validPass = await validatePassword(req.body.password, userData.password)
     if(!validPass) return res.status(400).send('Invalid password !');
     if(req.isAuthenticated()){
-        console.log(req.session);
-        res.status(302).redirect('/');;
+        // const user = await User.findOne({_id: req.session.passport.user})
+        // res.app.locals.user = {firstName: user.firstName};
+        res.status(302).redirect('/');
+        // res.status(302).redirect('/user/protected-route');
     } else {
         res.status(500).redirect('/login')
     }

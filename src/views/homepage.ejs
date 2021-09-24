@@ -7,8 +7,14 @@
       <a href="/user/register">Créer un compte utilisateur</a>
       <a href="/user/login">Se connecter</a>
       <a href="/user/logout">Se deconnecter</a>
+      <% if(typeof user !== 'undefined') { %>
+        <a href="/user/profile">mon profile</a>
+      <% } %>
     </nav>
     <h1>Bienvenue dans votre site de réservation</h1>
+    <% if(typeof user !== 'undefined') { %>
+      <h1><%= user.firstName %></h1>
+    <% } %>
     <h3>
       <% if (estates.length >0) { %>
         <%for (let estate of estates){ %>
