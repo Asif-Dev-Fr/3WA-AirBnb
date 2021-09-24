@@ -18,7 +18,7 @@ exports.isAdmin = (req, res, next) => {
 }
 
 exports.setUpProfile = async (req, res, next) => {
-  if(!req.session.passport.user){
+  if(req.session && req.session.passport && !req.session.passport.user){
     next();
   } else {
     res.locals.currentUser = req.user

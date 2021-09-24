@@ -27,17 +27,17 @@ const initMap = async () => {
   let latitude;
   let longitude;
   for (const { lat, lng, name, address, zipCode, price, _id } of estates) {
+    console.log(lat);
     // make a marker for each feature and add to the map
     latitude = lat;
     longitude = lng
     const description = `<a style="color: black;" href="/estate/${_id}"><strong>${name}</strong> ${address} ${zipCode} ${price}€</a>`
-    const marker = new mapboxgl.Marker({ color: "#000000" }).setLngLat([lng, lat]).setPopup(new mapboxgl.Popup().setHTML(description)).addTo(map);
+    new mapboxgl.Marker({ color: "#000000" }).setLngLat([lng, lat]).setPopup(new mapboxgl.Popup().setHTML(description)).addTo(map);
     // const description = { name, address, zipCode, price };
     // new mapboxgl.Popup()
     // .setLngLat([lng, lat])
     // .setHTML(description)
     // .addTo(map);
-    marker.cl
   };
   
   
