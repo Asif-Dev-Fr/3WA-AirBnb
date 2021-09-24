@@ -24,12 +24,12 @@ exports.addEstate = async (req, res, next) => {
         zipCode = splitZipcode[0]
     };
 
-    const newEstate = {name, address, price, zipCode, country, lat, lng};
+    const newEstate = {name, address, price, zipCode, country, lat, lng, photos: req.files.map(file => file.path)};
     console.log(newEstate);
     
     const estate = await new Estate(newEstate)
     estate.save()
-    res.redirect('/');
+    res.status(302).redirect('/');
 }
 
 exports.removeEstate = async (req, res) => {

@@ -1,19 +1,17 @@
-
 <% title="Créer compte" %>
 <%- include('../partials/head', {title}); %>
 
-
 <body>
-    <h1>Créer un compte</h1>
-    <form method="POST" action="user/register">
-    <input name="firstName" type="text" placeholder="Prénom">
-    <input name="lastName" type="text" placeholder="Nom">
-    <input name="email" type="email" placeholder="Email">
-    <input name="password" type="password" placeholder="Mot de passe">
-    <input name="password" type="password" placeholder="Confirmation Mot de passe">
-    <button>Send</button>
+		<%- include('../partials/flash-message'); %>
+    <h1>Enregistrement</h1>
+    <form action="/user/register" method="post" enctype="multipart/form-data">
+			<input name="firstName" type="text" placeholder="Prénom">
+			<input name="lastName" type="text" placeholder="Nom">
+			<input name="password" type="password" placeholder="Mot de passe">
+			<input name="email" type="email" placeholder="Email">
+			<input name="confirm_password" type="password" placeholder="Confirmation Mot de passe">
+			<input type="file" name="avatar" />
+			<button>Envoyer</button>
     </form>
-  
-</body>
-
+  </body>
 </html>

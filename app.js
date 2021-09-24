@@ -1,42 +1,81 @@
+// Packages import
+const flash = require('connect-flash');
 const express = require("express");
-const app = express();
-const PORT = 3000;
+const passport = require('passport');
+const path = require('path');
+const session = require("express-session")
+const MongoStore = require('connect-mongo');
 const mongoose = require("mongoose");
-require('dotenv').config()
+const app = express();
+require("dotenv").config();
 
-app.set("view engine", "ejs");
-app.set("views", "./src/views");
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-app.use(express.static('public'));
-
+// Routes imports
 const homepageRouter = require("./src/routes/home");
-const estatesRouter = require("./src/routes/estates")
-const usersRouter = require("./src/routes/users")
+const estatesRouter = require("./src/routes/estates");
+const usersRouter = require("./src/routes/users");
 const apiRouter = require("./src/routes/api")
 
-app.use('/', homepageRouter)
-app.use("/admin", estatesRouter)
-app.use("/user", usersRouter)
-app.use("/api", apiRouter)
+// Constant
+const PORT = 3000;
 
-const CONNECTION_URL = "mongodb+srv://root:TcKbelPoLBtE859z@rbnb.ftcnl.mongodb.net/test";
+/**
+ * ---------- VIEW ENGINE SETUP ----------
+ */
+app.set("view engine", "ejs");
+app.set("views", "./src/views");
 
-mongoose.connect(CONNECTION_URL, {
-    useNewUrlParser: true, 
+/**
+ * ---------- EXPRESS AND SESSION SETUP ----------
+ */
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: process.env.SECRET_SESSION,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 1000 * 60 * 60 * 24 },
+  store: MongoStore.create({mongoUrl: process.env.CONNECTION_URL, collectionName: "sessions"})
+}));
+app.use((req, res, next) => {
+  // console.log(res.app.locals);
+  next();
+})
+
+/**
+ * ---------- PASSEPORT AUTHENTICATION ----------
+ */
+
+// Require the entire Passport config module so app.js knows about it
+require('./src/config/passport');
+app.use(passport.initialize());
+app.use(passport.session());
+
+/**
+ * ---------- MONGOOSE CONNECTION ----------
+ */
+mongoose.connect(process.env.CONNECTION_URL, {
+    useNewUrlParser: true,
     useUnifiedTopology: true
 });
 
-// mongoose.set('useFindAndModify', false);
-
 mongoose.connection.once('open', () => {
-    console.log('Connected to MongoDB');
+  console.log('Connected to MongoDB');
 });
 
+app.use(flash());
 
+/**
+ * ---------- ROUTES ----------
+ */
+app.use('/', homepageRouter);
+app.use("/admin", estatesRouter);
+app.use("/user", usersRouter);
+app.use("/api", apiRouter)
+
+/**
+ * ---------- SERVER LISTENNING ----------
+ */
 app.listen(PORT, () => {
   console.log(`Server running at port : ${PORT} address : http://localhost:${PORT}/`);
 });
-
-
-// 46VJqTc4rET73eBt
