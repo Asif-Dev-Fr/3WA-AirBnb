@@ -1,27 +1,40 @@
 <% title="Homepage" %>
 <%- include('./partials/head', {title}); %>
 
-<body>
-  <nav>
-    <a href="/admin/add-estate">Ajouter établissement</a>
-    <a href="/user/register">Créer un compte utilisateur</a>
-  </nav>
-  <h1>Bienvenue dans votre site de réservation</h1>
-  <h3>
-    <% if (estates.length >0) { %>
-      <%for (let estate of estates){ %>
-        <div>
-          <h5><%= estate %></h5>
-          <div style="display: flex; flex-direction: row; justify-content: center">
-            <a href="/admin/edit-estate/<%= estate._id %>"><button>Modifier</button></a>
-            <a href="/admin/delete-estate/<%= estate._id %>"><button>Supprimer</button></a>
-          </div>
-        </div>
-      <%}%>
-    <%} else { %>
-      <p>Not Allowed</p>
+  <body>
+    <nav>
+      <a href="/admin/add-estate">Ajouter établissement</a>
+      <a href="/user/register">Créer un compte utilisateur</a>
+      <% if(typeof currentUser !== 'undefined') { %>
+        <a href="/user/logout">Se deconnecter</a>
+      <% } else { %>
+        <a href="/user/login">Se connecter</a>
+      <% } %>
+      <% if(typeof currentUser !== 'undefined') { %>
+        <a href="/user/profile">mon profile</a>
+      <% } %>
+    </nav>
+    <h1>Bienvenue dans votre site de réservation</h1>
+    <% if(typeof currentUser !== 'undefined') { %>
+      <h1><%= currentUser.firstName %></h1>
+      <% const isAdmin = currentUser.role === 'admin' %>
     <% } %>
-  </h3>
-</body>
-
+    <h3>
+      <% if (estates.length >0) { %>
+        <%for (let estate of estates){ %>
+          <div>
+            <h5><%= estate %></h5>
+            <div style="display: flex; flex-direction: row; justify-content: center">
+              <% if(typeof currentUser !== 'undefined' && currentUser.role === 'admin') { %>
+                <a href="/admin/edit-estate/<%= estate._id %>"><button>Modifier</button></a>
+                <a href="/admin/delete-estate/<%= estate._id %>"><button>Supprimer</button></a>
+              <% } %>
+            </div>
+          </div>
+        <%}%>
+      <%} else { %>
+        <p>Not Allowed</p>
+      <% } %>
+    </h3>
+  </body>
 </html>

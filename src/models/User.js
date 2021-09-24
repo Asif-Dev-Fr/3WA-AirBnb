@@ -38,6 +38,7 @@ const UserSchema = new mongoose.Schema({
       default: false,
       required: true
     },
+    avatar: String
   },
   { timestamps: true }
 );

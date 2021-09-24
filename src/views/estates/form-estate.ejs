@@ -15,22 +15,24 @@
 <body>
     <% if (!estate) { %>
     <h1> Add estate ejs</h1>
-    <form method="POST" action="/admin/add-estate">
+    <form method="POST" action="/admin/add-estate" enctype="multipart/form-data">
         <input name="name" type="text" placeholder="name">
         <input name="price" type="number" placeholder="price">
         <input name="address" type="text" placeholder="address">
         <input name="zipCode" type="text" placeholder="zipCode">
         <input name="country" type="text" placeholder="country">
+        <input name="photos" type="file" multiple="multiple">
         <button>Send</button>
     </form>
     <%} else { %>
     <h1> Edit estate ejs</h1>
-    <form method="POST" action="/admin/update-estate/<%= estate._id %>">
+    <form method="POST" action="/admin/update-estate/<%= estate._id %>" enctype="multipart/form-data">
         <input name="name" type="text"  placeholder="name" value="<%= estate.name %>">
         <input name="price" type="number" value="<%= estate.price %>" placeholder="price">
         <input name="address" type="text" value="<%= estate.address %>" placeholder="address">
         <input name="zipCode" type="text" value="<%= estate.zipCode %>" placeholder="zipCode">
         <input name="country" type="text" value="<%= estate.country %>" placeholder="country">
+        <input name="photos" type="file" multiple="multiple">
         <button>Send</button>
     </form>
     <% } %>
