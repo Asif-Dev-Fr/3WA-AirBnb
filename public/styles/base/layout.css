@@ -15,7 +15,11 @@ footer {
    bottom:0;  
 }
 
+.banner-container {
+   height: 32rem;
+}
 .banner {
+   /* height: 35rem; */
    background-image: url('../../images/banners/navi.jpg');
    background-size: cover;
    background-position-y: 38%;
