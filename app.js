@@ -11,9 +11,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Serve static files
-app.use(express.static(path.join(__dirname,'public')));
-app.use('/admin',express.static(path.join(__dirname,'public')));
-app.use('/user',express.static(path.join(__dirname,'public')));
+const publicFolder = path.join(__dirname,'public')
+app.use(express.static(publicFolder));
+app.use('/admin',express.static(publicFolder));
+app.use('/user',express.static(publicFolder));
+// console.log(chalk.bgGreen(path.join(__dirname,'public')))
+
 
 // Set view engine and default layout
 app.use(expressLayouts);
@@ -36,7 +39,8 @@ app.use("/user", usersRouter)
 
 
 // MONGO BDD
-const CONNECTION_URL = "mongodb+srv://root:TcKbelPoLBtE859z@rbnb.ftcnl.mongodb.net/test";
+/* const CONNECTION_URL = "mongodb+srv://root:TcKbelPoLBtE859z@rbnb.ftcnl.mongodb.net/test"; */
+const CONNECTION_URL = "mongodb+srv://arinodebnb:arinodebnb@cluster0bnb.xxjlp.mongodb.net/estates";
 
 mongoose.connect(CONNECTION_URL, {
     useNewUrlParser: true, 

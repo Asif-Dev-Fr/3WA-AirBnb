@@ -1,4 +1,28 @@
 
+
+  <nav>
+    TEEEEEEEEST
+    <a class="text-link" href="/admin/add-estate">Ajouter établissement</a>
+    <a class="text-link" href="/user/register">Créer un compte utilisateur</a>
+  </nav>
+  <h1>Bienvenue dans votre site de réservation</h1>
+  <h3>
+    <% if (estates.length >0) { %>
+      <%for (let estate of estates){ %>
+        <div>
+          <h5><%= estate %></h5>
+          <div style="display: flex; flex-direction: row; justify-content: center">
+            <a href="/admin/edit-estate/<%= estate._id %>" class="mx-1"><button class="btn-indigo">Modifier</button></a>
+            <a href="/admin/delete-estate/<%= estate._id %>" class="mx-1"><button class="btn-red">Supprimer</button></a>
+          </div>
+        </div>
+      <%}%>
+    <%} else { %>
+      <p>Not Allowed</p>
+    <% } %>
+  </h3>
+
+  
   <!-- TEST TABLE -->
   <div class="flex flex-col">
   <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -64,29 +88,13 @@
       </div>
     </div>
   </div>
+
+
+  
 </div>
 <!-- TEST -->
 
-  <nav>
-    <a class="text-link" href="/admin/add-estate">Ajouter établissement</a>
-    <a class="text-link" href="/user/register">Créer un compte utilisateur</a>
-  </nav>
-  <h1>Bienvenue dans votre site de réservation</h1>
-  <h3>
-    <% if (estates.length >0) { %>
-      <%for (let estate of estates){ %>
-        <div>
-          <h5><%= estate %></h5>
-          <div style="display: flex; flex-direction: row; justify-content: center">
-            <a href="/admin/edit-estate/<%= estate._id %>" class="mx-1"><button class="btn-indigo">Modifier</button></a>
-            <a href="/admin/delete-estate/<%= estate._id %>" class="mx-1"><button class="btn-red">Supprimer</button></a>
-          </div>
-        </div>
-      <%}%>
-    <%} else { %>
-      <p>Not Allowed</p>
-    <% } %>
-  </h3>
 
 
-</html>
+
+

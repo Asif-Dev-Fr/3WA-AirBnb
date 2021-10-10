@@ -2,9 +2,9 @@ html, body, body>div {
    min-height:100%;
 }
 
-body>div {
+/* body>div {
    position:relative;
-}
+} */
 
 header {
    min-height: 8rem;
@@ -15,13 +15,24 @@ footer {
    bottom:0;  
 }
 
-.banner-container {
+.banner-sunset-container {
    height: 32rem;
 }
-.banner {
-   /* height: 35rem; */
+
+.banner-sunset {
+   /* relative */
    background-image: url('../../images/banners/navi.jpg');
    background-size: cover;
    background-position-y: 38%;
+}
+
+.banner-sunset-catchphrase {
+   /* absolute */
+   left: 25rem;
+   top: 18rem;
+}
+
+.banner-sunset-bait i {
+   font-size: 2.4rem;
 }
 

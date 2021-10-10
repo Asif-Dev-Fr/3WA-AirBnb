@@ -17,11 +17,11 @@
     <%} else { %>
     <h1> Edit estate ejs</h1>
     <form method="POST" action="/admin/update-estate/<%= estate._id %>">
-        <input name="name" type="text"  placeholder="name" value="<%= estate.name %>">
-        <input name="price" type="number" value="<%= estate.price %>" placeholder="price">
-        <input name="address" type="text" value="<%= estate.address %>" placeholder="address">
-        <input name="zipCode" type="text" value="<%= estate.zipCode %>" placeholder="zipCode">
-        <input name="country" type="text" value="<%= estate.country %>" placeholder="country">
+        <input class="input" name="name" type="text"  placeholder="name" value="<%= estate.name %>">
+        <input class="input" name="price" type="number" value="<%= estate.price %>" placeholder="price">
+        <input class="input" name="address" type="text" value="<%= estate.address %>" placeholder="address">
+        <input class="input" name="zipCode" type="text" value="<%= estate.zipCode %>" placeholder="zipCode">
+        <input class="input" name="country" type="text" value="<%= estate.country %>" placeholder="country">
         <button class="btn-indigo">Send</button>
     </form>
     <% } %>

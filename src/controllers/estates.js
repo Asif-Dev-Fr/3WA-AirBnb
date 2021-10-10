@@ -15,10 +15,11 @@ exports.editEstate = async (req, res) => {
     const estate = await Estate.findOne({ _id: req.params.id });
     const isEdit = true
     const title = "Édition établissement"
-    res.status(302).render("estates/form-estate", {
+    res.render("estates/form-estate", {
         estate,
         isEdit,
-        title 
+        title,
+        layout: './layouts/admin-layout'
     })
 }
 

@@ -1,8 +1,23 @@
+/* FONTS */
+/* 
+font-family: 'Bebas Neue', cursive;
+font-family: 'Montserrat', sans-serif; 
+*/
+
+
+html {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6, .catchphrase {
+  font-family: 'Bebas Neue', cursive;
+}
 
 .text-link {
-  @apply text-lg font-medium text-indigo-500
+  font-family: 'Josefin Sans', sans-serif;
+  @apply text-lg font-medium text-indigo-500;
 }
 
 .text-link:hover {
-  @apply  text-xl font-bold text-indigo-700
+  @apply  text-xl font-bold text-indigo-700;
 }

@@ -1,6 +1,12 @@
 
+.btn {
+  font-family: 'Josefin Sans', sans-serif;
+  @apply whitespace-nowrap font-medium text-center py-2 px-5 rounded;
+
+}
+
 .btn-indigo {
-  @apply whitespace-nowrap font-medium bg-indigo-500 text-white text-center py-2 px-5 rounded;
+  @apply btn bg-indigo-500 text-white;
 }
 
 .btn-indigo:hover {
@@ -8,7 +14,7 @@
 }
 
 .btn-pink {
-  @apply whitespace-nowrap font-medium bg-pink-500 text-white text-center py-2 px-4 rounded;
+  @apply btn bg-pink-500 text-white;
 }
 
 .btn-pink:hover {
@@ -16,7 +22,7 @@
 }
 
 .btn-red {
-  @apply whitespace-nowrap font-medium bg-red-500 text-white text-center py-2 px-4 rounded;
+  @apply btn bg-red-500 text-white;
 }
 
 .btn-red:hover {
