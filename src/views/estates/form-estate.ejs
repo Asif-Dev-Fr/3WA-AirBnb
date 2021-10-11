@@ -33,27 +33,12 @@
   <body>
     <% if (!estate) { %>
     <h1>Add estate ejs</h1>
-    <!-- <form method="POST" action="/admin/add-estate"> -->
     <form id="form" enctype="multipart/form-data">
       <input name="name" type="text" id="name" placeholder="name" />
       <input name="price" type="number" id="price" placeholder="price" />
-      <!-- <input name="address" type="text" id="result2" placeholder="address">
-        <input name="zipCode" type="text" placeholder="zipCode">
-        <input name="country" type="text" placeholder="country"> -->
       <div id="geocoder"></div>
       <input name="photos" type="file" id="photos" multiple="multiple">
       <button>Send</button>
-    <!-- <h1> Add estate ejs</h1>
-    <form method="POST" action="/admin/add-estate" enctype="multipart/form-data">
-        <input name="name" type="text" placeholder="name">
-        <input name="price" type="number" placeholder="price">
-        <input name="address" type="text" placeholder="address">
-        <input name="zipCode" type="text" placeholder="zipCode">
-        <input name="country" type="text" placeholder="country">
-        <input name="photos" type="file" multiple="multiple">
-        <button>Send</button>
-    </form> -->
-
     <pre id="result"></pre>
     <%} else { %>
     <h1> Edit estate ejs</h1>
@@ -73,7 +58,6 @@
       if (form) {
         form.addEventListener("submit", async (e) => {
           e.preventDefault();
-          console.log(e);
 
           const name = document.getElementById("name").value;
           const price = document.getElementById("price").value;
@@ -81,60 +65,28 @@
             ".mapboxgl-ctrl-geocoder--input"
           ).value;
           const photos = document.getElementById("photos");
-          // console.log(photos.files, photos.files[0], photos.files[1], photos.files[2])
-          const array = Array.from(photos.files);
-          console.log(array)
-          const allPhotos = array.map((photo) => {
-            'upload/' + photo.name
+          const files = Array.from(photos.files);
+          const allPhotos = files.map((photo) => {
+            return 'upload/' + photo.name
           })
-          
-
-          console.log(allPhotos);
 
           const obj = JSON.stringify({
             name,
             price,
             fullAddress,
-            img
+            allPhotos
           });
 
-            console.log(obj)  
-
-          // await fetch("http://localhost:3000/admin/add-estate", {
-          //   method: "POST",
-          //   body: obj,
-          //   headers: {
-          //     "Content-type": "application/json; charset=UTF-8",
-          //   },
-          // });
-          // window.location.replace("http://localhost:3000/");
+          await fetch("http://localhost:3000/admin/add-estate", {
+            method: "POST",
+            body: obj,
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          });
+          window.location.replace("http://localhost:3000/");
         });
       }
     </script>
-    <!-- <script>
-        mapboxgl.accessToken = 'pk.eyJ1Ijoicnl1LWp1IiwiYSI6ImNrdHZpemdxbTBrcHEycG1td3VycjVudGQifQ.a-gbraL7LSdPmys8SqB_-w';
-    const geocoder = new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        types: 'country,region,place,postcode,locality,neighborhood',
-        queryOptions: {
-            country: "fr"
-        }
-    });
-     
-    geocoder.addTo('#geocoder');
-     
-    // Get the geocoder results container.
-    const results = document.getElementById('result');
-     
-    // Add geocoder result to container.
-    geocoder.on('result', (e) => {
-    results.innerText = JSON.stringify(e.result, null, 2);
-    });
-     
-    // Clear results container when search is cleared.
-    geocoder.on('clear', () => {
-    results.innerText = '';
-    });
-    </script> -->
   </body>
 </html>

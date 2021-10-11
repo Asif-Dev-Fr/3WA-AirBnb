@@ -9,7 +9,7 @@ exports.addEstate = async (req, res, next) => {
     let address;
     let zipCode;
     let country;
-    let photos = [req.body.img]
+    let photos = req.body.allPhotos
 
     const fetch = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${req.body.fullAddress}.json?access_token=${process.env.MAPBOX_TOKEN}&limit=1`)
     //console.log(fetch.data.features[0]);
@@ -27,9 +27,10 @@ exports.addEstate = async (req, res, next) => {
 
     const newEstate = {name, address, price, zipCode, country, lat, lng, photos};
     console.log(newEstate);
-    
+
     const estate = await new Estate(newEstate)
     estate.save()
+    console.log("save");
     res.status(302).redirect('/');
 }
 

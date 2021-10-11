@@ -1,6 +1,6 @@
 const autocompleteFeatures = () => {
   mapboxgl.accessToken =
-    "pk.eyJ1Ijoicnl1LWp1IiwiYSI6ImNrdHZpemdxbTBrcHEycG1td3VycjVudGQifQ.a-gbraL7LSdPmys8SqB_-w";
+    "pk.eyJ1Ijoicnl1LWp1IiwiYSI6ImNrdW1oNzFjeTBlZWcyb3BpN2Uyb20wY2UifQ.dk4555ZgzCde7ihZsIqktQ";
   const geocoder = new MapboxGeocoder({
     accessToken: mapboxgl.accessToken,
     // types: "country,region,place,postcode,locality, address",

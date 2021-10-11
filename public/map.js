@@ -1,5 +1,5 @@
 const initMap = async () => {
-  mapboxgl.accessToken = "pk.eyJ1Ijoicnl1LWp1IiwiYSI6ImNrdHZpemdxbTBrcHEycG1td3VycjVudGQifQ.a-gbraL7LSdPmys8SqB_-w";
+  mapboxgl.accessToken = "pk.eyJ1Ijoicnl1LWp1IiwiYSI6ImNrdW1oNzFjeTBlZWcyb3BpN2Uyb20wY2UifQ.dk4555ZgzCde7ihZsIqktQ";
   const map = new mapboxgl.Map({
     container: "map", // container ID
     style: "mapbox://styles/mapbox/streets-v11", // style URL
@@ -39,8 +39,8 @@ const initMap = async () => {
     // .setHTML(description)
     // .addTo(map);
   };
-  
-  
+
+
 };
 
 window.addEventListener("load", initMap);
