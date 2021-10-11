@@ -1,5 +1,6 @@
 const express = require('express');
-const {getEstates, showEstate} = require("../controllers/home");
+const {getEstates} = require("../controllers/home");
+const {showEstate} = require("../controllers/estates");
 
 const {setUpProfile} = require("../middlewares/authMiddleware");
 
@@ -13,6 +14,6 @@ const router = express.Router();
 
 router.get("/", setUpProfile, getEstates);
 
-router.get("/estate/:id", showEstate);
+router.get("/:id", showEstate);
 
 module.exports = router

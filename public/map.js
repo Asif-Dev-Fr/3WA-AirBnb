@@ -13,31 +13,12 @@ const initMap = async () => {
 
   const data = await fetch("http://localhost:3000/api/estates");
   const estates = await data.json();
-  console.log(estates);
-
-  // // Create a new marker.
-  // const marker = new mapboxgl.Marker({
-  //   color: "#000000",
-  //   // draggable: true,
-  // })
-  //   .setLngLat([2.25978638521092, 46.79052544169729])
-  //   .addTo(map);
-
-  // set multiple markers :
-  let latitude;
-  let longitude;
   for (const { lat, lng, name, address, zipCode, price, _id } of estates) {
-    console.log(lat);
     // make a marker for each feature and add to the map
     latitude = lat;
     longitude = lng
     const description = `<a style="color: black;" href="/estate/${_id}"><strong>${name}</strong> ${address} ${zipCode} ${price}€</a>`
     new mapboxgl.Marker({ color: "#000000" }).setLngLat([lng, lat]).setPopup(new mapboxgl.Popup().setHTML(description)).addTo(map);
-    // const description = { name, address, zipCode, price };
-    // new mapboxgl.Popup()
-    // .setLngLat([lng, lat])
-    // .setHTML(description)
-    // .addTo(map);
   };
 
 
