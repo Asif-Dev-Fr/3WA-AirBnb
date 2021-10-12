@@ -40,6 +40,12 @@ footer {
    font-size: 2.4rem;
 }
 
+.hr-indigo {
+   border: none;
+   height: 1px;
+   background-color: rgba(99, 102, 241);
+}
+
 .mapboxgl-ctrl-geocoder--icon {
    display: none !important;
 }

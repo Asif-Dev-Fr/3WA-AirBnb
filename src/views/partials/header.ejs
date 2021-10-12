@@ -22,13 +22,16 @@
         <span class="px-2 items-center inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
           Admin
         </span>
+        <% } else if (isUserConnected) { %>
+        <span class="px-2 items-center inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+          User
+        </span>
         <% } %>
-        <a href="#" class="text-link">
-          Pricing
-        </a>
-        <a href="#" class="text-link">
-          Docs
-        </a>
+        <% if (typeof currentUser !== 'undefined') { %>
+        <a class="text-link" href="/admin/add-estate">Ajouter établissement</a>
+        <% } else { %>
+        <a class="text-link" href="/user/register">Créer un compte utilisateur</a>
+        <% } %>
 
       </nav>
       

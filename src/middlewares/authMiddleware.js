@@ -3,6 +3,7 @@ const User = require('../models/User');
 exports.isAuth = (req, res, next) => {
   // next()
   if(req.isAuthenticated()) {
+    res.locals.currentUser = req.user
     next();
   } else {
     res.status(401).json({msg: 'You are not authorize to view this resource'})
@@ -11,6 +12,7 @@ exports.isAuth = (req, res, next) => {
 
 exports.isAdmin = (req, res, next) => {
   if(req.isAuthenticated() && req.user.role == 'admin') {
+    res.locals.currentUser = req.user
     next();
   } else {
     res.status(401).json({msg: 'You are not authorize to view this resource because your not an admin'})

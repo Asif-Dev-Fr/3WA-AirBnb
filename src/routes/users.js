@@ -22,7 +22,7 @@ router.post("/register", upload.single("avatar"), register);
 
 router.get("/login", (req, res) => {
   let message = req.flash();
-  const title = "Login user"
+  const title = "Connexion"
   res.render("users/form-login", {
     message,
     title,
@@ -47,7 +47,11 @@ router.get('/admin-route', isAuth, isAdmin, (req, res, next) => {
 })
 
 router.get('/profile', setUpProfile, (req, res, next) => {
-  res.render('users/profile')
+  const title = "Mon profil"
+  res.render('users/profile', {
+    title,
+    layout: './layouts/user-layout'
+  })
 })
 
 module.exports = router;
