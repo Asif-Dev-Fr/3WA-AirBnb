@@ -2,8 +2,9 @@ const express = require("express");
 const passport = require('passport');
 
 const { register, login } = require("../controllers/users");
+const {allBooking} = require("../controllers/booking");
 const upload = require("../utils/multer-init");
-const {isAuth,isAdmin,setUpProfile} = require("../middlewares/authMiddleware")
+const {isAuth,isAdmin,setUpProfile} = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 
@@ -29,7 +30,7 @@ router.post("/login", passport.authenticate("local"), login);
 
 router.get("/logout", (req, res) => {
   req.logOut();
-  res.locals.user = null;
+  res.locals.currentUser = null;
   res.redirect('/');
 })
 
@@ -44,5 +45,7 @@ router.get('/admin-route', isAuth, isAdmin, (req, res, next) => {
 router.get('/profile', setUpProfile, (req, res, next) => {
   res.render('users/profile')
 })
+
+router.get("/bookings", setUpProfile, allBooking);
 
 module.exports = router;

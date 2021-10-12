@@ -13,8 +13,9 @@ require("dotenv").config();
 const homepageRouter = require("./src/routes/home");
 const estatesAdminRouter = require("./src/routes/estates-admin-router");
 const usersRouter = require("./src/routes/users");
-const apiRouter = require("./src/routes/api")
-const estateRouter = require("./src/routes/estate")
+const apiRouter = require("./src/routes/api");
+const estateRouter = require("./src/routes/estate");
+const bookingRouter = require("./src/routes/booking");
 
 // Constant
 const PORT = 3000;
@@ -72,7 +73,8 @@ app.use('/', homepageRouter);
 app.use("/admin", estatesAdminRouter);
 app.use("/estate", estateRouter);
 app.use("/user", usersRouter);
-app.use("/api", apiRouter)
+app.use("/api", apiRouter);
+app.use("/booking", bookingRouter);
 
 /**
  * ---------- SERVER LISTENNING ----------

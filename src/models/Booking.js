@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const BookingSchema = new mongoose.Schema({
-    _user: Schema.Types.ObjectId,
-    _estate: Schema.Types.ObjectId,
+const BookingSchema = Schema({
+    _user: { type: Schema.Types.ObjectId, ref: "User"},
+    _estate: { type: Schema.Types.ObjectId, ref: "Estate"},
     start_date: { type: Date },
     end_date: { type: Date },
   },{ timestamps: true });
