@@ -4,7 +4,7 @@ const passport = require('passport');
 const { register, login } = require("../controllers/users");
 const upload = require("../utils/multer-init");
 const {isAuth,isAdmin,setUpProfile} = require("../middlewares/authMiddleware")
-
+// require('../config/passport')(passport)
 const router = express.Router();
 
 router.get("/register", (req, res) => {
@@ -25,7 +25,8 @@ router.get("/login", (req, res) => {
   });
 });
 
-router.post("/login", passport.authenticate("local"), login);
+router.post("/login", login);
+// router.post("/login", passport.authenticate("jwt"), login);
 
 router.get("/logout", (req, res) => {
   req.logOut();
@@ -33,9 +34,13 @@ router.get("/logout", (req, res) => {
   res.redirect('/');
 })
 
-router.get('/protected-route', isAuth, setUpProfile, (req, res, next) => {
-  res.send('You made it to the protected route')
+router.get('/protected', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  console.log('protected route');
+  res.status(200).json({success: true, msg: "authorize you are"})
 })
+// router.get('/protected-route', isAuth, setUpProfile, (req, res, next) => {
+//   res.send('You made it to the protected route')
+// })
 
 router.get('/admin-route', isAuth, isAdmin, (req, res, next) => {
   res.send('You made it to the admin route')

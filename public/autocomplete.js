@@ -15,7 +15,6 @@ const autocompleteFeatures = () => {
 
   // Add geocoder result to container.
   geocoder.on("result", async (e) => {
-    console.log(e.result);
     results.innerText = JSON.stringify(e.result, null, 2);
   });
 

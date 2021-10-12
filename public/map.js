@@ -13,7 +13,6 @@ const initMap = async () => {
 
   const data = await fetch("http://localhost:3000/api/estates");
   const estates = await data.json();
-  console.log(estates);
 
   // // Create a new marker.
   // const marker = new mapboxgl.Marker({
@@ -27,7 +26,6 @@ const initMap = async () => {
   let latitude;
   let longitude;
   for (const { lat, lng, name, address, zipCode, price, _id } of estates) {
-    console.log(lat);
     // make a marker for each feature and add to the map
     latitude = lat;
     longitude = lng

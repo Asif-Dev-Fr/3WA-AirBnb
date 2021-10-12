@@ -12,6 +12,7 @@ const router = express.Router();
 // }
 
 router.get("/", setUpProfile, getEstates);
+// router.get("/", setUpProfile, getEstates);
 
 router.get("/estate/:id", showEstate);
 

@@ -46,10 +46,10 @@ app.use((req, res, next) => {
  * ---------- PASSEPORT AUTHENTICATION ----------
  */
 
-// Require the entire Passport config module so app.js knows about it
-require('./src/config/passport');
+// Pass the global passport object into the configuration function
+require('./src/config/passport')(passport);
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 
 /**
  * ---------- MONGOOSE CONNECTION ----------
