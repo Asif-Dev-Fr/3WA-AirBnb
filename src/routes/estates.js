@@ -1,8 +1,6 @@
 const express = require("express");
-const {addEstate} = require("../controllers/estates");
-const {removeEstate} = require("../controllers/estates");
-const {editEstate} = require("../controllers/estates");
-const {updateEstate} = require("../controllers/estates");
+const {addEstate, removeEstate, editEstate, updateEstate} = require("../controllers/estates");
+const upload = require("../utils/multer-init")
 
 const router = express.Router();
 
@@ -17,7 +15,7 @@ router.get("/add-estate", (req, res, next) => {
   });
 });
 
-router.post("/add-estate", addEstate);
+router.post("/add-estate", upload.array("photos", 5), addEstate);
 
 router.get("/delete-estate/:id", removeEstate);
 

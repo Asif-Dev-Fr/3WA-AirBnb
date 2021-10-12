@@ -18,8 +18,11 @@
         </button>
       </div>
       <nav class="hidden md:flex space-x-10">
-
-
+        <% if (isAdminConnected) { %>
+        <span class="px-2 items-center inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+          Admin
+        </span>
+        <% } %>
         <a href="#" class="text-link">
           Pricing
         </a>
@@ -29,13 +32,17 @@
 
       </nav>
       
-      <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-        <a href="#" class="btn-pink">
-          Connexion
-        </a>
-        <a href="#" class="ml-8 whitespace-nowrap inline-flex items-center justify-center btn-indigo">
+      <div class="hidden md:flex items-center justify-center md:flex-1 lg:w-0">
+        <% if (typeof currentUser !== 'undefined') { %>
+        <a class=" whitespace-nowrap inline-flex items-center justify-center btn-red" href="/user/logout">Déconnexion</a>
+        <a class=" ml-8 whitespace-nowrap inline-flex items-center justify-center btn-indigo"  href="/user/profile">Mon profil</a>
+        <% } else { %>
+          <a class=" whitespace-nowrap inline-flex items-center justify-center btn-red" href="/user/login">Connexion</a>
+          <a href="/user/register" class="ml-8 whitespace-nowrap inline-flex items-center justify-center btn-indigo">
           Créer un compte
         </a>
+        <% } %>
+        
       </div>
     </div>
   </div>

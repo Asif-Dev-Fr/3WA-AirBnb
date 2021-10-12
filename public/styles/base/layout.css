@@ -1,3 +1,7 @@
+html {
+   position: relative;
+}
+
 html, body, body>div {
    min-height:100%;
 }
@@ -36,3 +40,11 @@ footer {
    font-size: 2.4rem;
 }
 
+.mapboxgl-ctrl-geocoder--icon {
+   display: none !important;
+}
+
+.mapboxgl-ctrl-geocoder {
+    width: 100% !important;
+    min-width: 70% !important;
+}

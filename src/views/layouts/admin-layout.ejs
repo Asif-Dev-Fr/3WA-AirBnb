@@ -4,18 +4,18 @@
 <%- include('../partials/head.ejs') %>            
 <body id="app">
   <div class="box-border">
-    <h1>ADMIN LAYOUT</h1>
+    <!-- <h1>ADMIN LAYOUT</h1> -->
     <header class="bg-indigo-100 w-full flex items-center">
-    <%- include('../partials/header.ejs') %>
+    <%- include('../partials/header.ejs', {isAdminConnected: true}) %>
     </header>
 
     <section class="w-full h-96 banner-container ">
         <%- include('../partials/banner.ejs') %>
     </section>
-    <main class="lg:container flex flex-col justify-center items-center mx-auto">
+    <main class="lg:container flex flex-col justify-center items-center mx-auto mb-12 py-10">
         <%- body %>
     </main>
-    <footer class="bg-indigo-100 h-20 w-full">
+    <footer class="bg-indigo-100 h-20 w-full flex justify-center items-center">
     <%- include('../partials/footer.ejs') %>
     </footer>
   </div>

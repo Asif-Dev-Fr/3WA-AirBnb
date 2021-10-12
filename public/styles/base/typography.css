@@ -13,6 +13,13 @@ h1,h2,h3,h4,h5,h6, .catchphrase {
   font-family: 'Bebas Neue', cursive;
 }
 
+h1 {
+  margin: 1rem 0;
+  font-size: 2.70rem;
+  line-height: 2.5rem;
+  color: rgba(99, 102, 241);
+}
+
 .text-link {
   font-family: 'Josefin Sans', sans-serif;
   @apply text-lg font-medium text-indigo-500;

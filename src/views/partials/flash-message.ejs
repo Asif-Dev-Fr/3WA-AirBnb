@@ -1,0 +1,5 @@
+<% if(typeof message !== 'undefined' && message.error) { %>
+  <p><%=message.error[0]%></p>
+<%} else if(message.success) { %>
+  <p><%=message.success[0]%></p>
+<% } %>

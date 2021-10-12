@@ -4,12 +4,12 @@
 <body id="app">
   <div class="box-border">
     <header class="bg-indigo-100 w-full flex items-center">
-      <%- include('../partials/header.ejs') %>
+      <%- include('../partials/header.ejs', {isAdminConnected: false}) %>
     </header>
     <section class="w-full banner-sunset-container ">
       <%- include('../partials/banner.ejs') %>
     </section>
-      <main class="lg:container flex flex-col justify-center items-center mx-auto">
+      <main class="lg:container flex flex-col justify-center items-center mx-auto mb-12 py-10">
         <%- body %>
     </main>
     <footer class="bg-indigo-100 h-20 w-full flex justify-center items-center">

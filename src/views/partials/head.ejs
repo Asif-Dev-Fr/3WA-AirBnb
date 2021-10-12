@@ -10,5 +10,62 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap" rel="stylesheet">
     <!-- styles -->
     <link rel="stylesheet" href="/styles/style.css">
+    <!-- css mapbox -->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css"
+      type="text/css"
+    />
+    <style>
+      #geocoder {
+        z-index: 1;
+        margin: 20px;
+      }
+      .mapboxgl-ctrl-geocoder {
+        min-width: 50%;
+      }
+    </style>
+    <!-- api mapbox -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+    <script src="/map.js"></script>
+    <script src="/autocomplete.js"></script>
+    <script>
+      const form = document.getElementById("form");
+      if (form) {
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const price = document.getElementById("price").value;
+          const fullAddress = document.querySelector(
+            ".mapboxgl-ctrl-geocoder--input"
+          ).value;
+          const photos = document.getElementById("photos");
+          const files = Array.from(photos.files);
+          const allPhotos = files.map((photo) => {
+            return 'upload/' + photo.name
+          })
+
+          const obj = JSON.stringify({
+            name,
+            price,
+            fullAddress,
+            allPhotos
+          });
+
+          await fetch("http://localhost:3000/admin/add-estate", {
+            method: "POST",
+            body: obj,
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          });
+          window.location.replace("http://localhost:3000/");
+        });
+      }
+    </script>
     <title><%= title %></title>
 </head> 

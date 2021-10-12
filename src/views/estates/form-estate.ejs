@@ -1,7 +1,7 @@
 
 
 
-    <% if (!isEdit) { %>
+    <!-- <% if (!isEdit) { %>
     <h1> Add estate ejs</h1>
     <form method="POST" action="/admin/add-estate">
         <input class="input" name="name" type="text" placeholder="name">
@@ -24,6 +24,75 @@
         <input class="input" name="country" type="text" value="<%= estate.country %>" placeholder="country">
         <button class="btn-indigo">Send</button>
     </form>
+    <% } %> -->
+
+
+
+    <div class="flex">
+
+      <div>
+          <% if (!isEdit) { %>
+    <h1>Add estate ejs</h1>
+    <form id="form" enctype="multipart/form-data">
+      <div class="my-2">
+        <input class="input" name="name" type="text" id="name" placeholder="Libellé" />
+        <input class="input" name="price" type="number" id="price" placeholder="Prix" />
+      </div>
+     
+      <!-- search -->
+      <div class="flex items-center my-3">
+        <button class="btn-round-icon hover:bg-indigo-500" disabled><i class="fas fa-search mx-auto"></i></button>
+        <div id="geocoder"></div>
+      </div>
+      
+      <input class="input" name="photos" type="file" id="photos" multiple="multiple">
+
+      <div class="mt-5">
+        <button class="btn-indigo">Envoyer</button>
+        <input class="btn-red" type="reset" value="Reset" />
+      </div>
+      
+    <pre id="result"></pre>
+    <%} else { %>
+    <h1> Edit estate ejs</h1>
+    <form method="POST" action="/admin/update-estate/<%= estate._id %>" enctype="multipart/form-data">
+      <div class="my-2">
+        <p class="my-1"><label for="name">Libellé</label></p>
+        <input class="input" name="name" id="name" type="text"  placeholder="Libellé" value="<%= estate.name %>">
+        <p class="my-1"><label for="price">Prix</label></p>
+        <input class="input" name="price" id="price" type="number" value="<%= estate.price %>" placeholder="Prix">
+      </div>
+        <!-- <input class="input" name="address" type="text" value="<%= estate.address %>" placeholder="address">
+        <input class="input" name="zipCode" type="text" value="<%= estate.zipCode %>" placeholder="zipCode">
+        <input class="input" name="country" type="text" value="<%= estate.country %>" placeholder="country"> -->
+        
+        <!-- search -->
+      <div class="flex items-center my-3">
+        <button class="btn-round-icon hover:bg-indigo-500" disabled><i class="fas fa-search mx-auto"></i></button>
+        <div id="geocoder"></div>
+      </div>
+
+        <input class="input" name="photos" type="file" multiple="multiple">
+        <div class="mt-5">
+          <button class="btn-indigo">Envoyer</button>
+          <input class="btn-red" type="reset" value="Reset" />
+        </div>
+    </form>
     <% } %>
+      </div>
 
+      <div class="my-5 ml-8 p5">
+      <div
+       style="width: 550px; height: 550px; border-radius: 12px"
+        id="map"
+      ></div>
+    </div>
+    
+    </div>
+    
 
+    
+    
+    
+
+</html>

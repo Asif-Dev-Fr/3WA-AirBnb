@@ -1,0 +1,4 @@
+.img-estate {
+  width: 130px;
+  @apply rounded-lg;
+}
