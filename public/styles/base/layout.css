@@ -54,3 +54,7 @@ footer {
     width: 100% !important;
     min-width: 70% !important;
 }
+
+.th-title {
+   @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+}

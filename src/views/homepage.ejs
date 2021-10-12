@@ -9,9 +9,10 @@
   <h3>
     <% if (estates.length > 0 && typeof currentUser === 'undefined') { %>
       <div class="flex justify-between mt-10">
-        <ul class="text-xl mr-10">
+        <ul class="text-xl mr-12">
           <%for (let estate of estates){ %>
-            <li class="flex items-center mt-6">
+            <a href="<%= `/estate/${estate.id}` %>">
+            <li class="flex items-center mt-8">
               <div class="pa-2 my-2">
                 <h2 class="text-3xl flex items-center"><%= estate.name %></h2>
                 <div class="font-bold my-1 text-indigo-600"><%= estate.price %> €</div>
@@ -34,13 +35,15 @@
                 <a href="/admin/edit-estate/<%= estate._id %>" class="mx-1"><button class="btn-indigo">Modifier</button></a>
                 <a href="/admin/delete-estate/<%= estate._id %>" class="mx-1"><button class="btn-red">Supprimer</button></a>
               </div> -->
+              
             </li>
+            </a>
             <hr class="hr-indigo">
           <%}%>
         </ul>
         
         <!-- map -->
-        <div class="flex items-center">
+        <div class="flex items-center ml-12">
           <div
             style="width: 550px; height: 550px; border-radius: 12px"
             id="map">
@@ -63,19 +66,19 @@
           <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
               <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Libellé
+                <th scope="col" class="th-title">
+                  Libelléth-title
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" class="th-title">
                   Adresse
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" class="th-title">
                   Prix
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" class="th-title">
                   Pays
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" class="th-title">
                   Photos
                 </th>
                 <th scope="col" class="relative px-6 py-3">
@@ -90,9 +93,12 @@
                     <td class="px-6 py-4 whitespace-nowrap">
                       <div class="flex items-center">
                         <div class="ml-4">
-                          <div class="capitalize text-lg font-lg font-bold text-gray-900">
-                            <%= estate.name %>
+                          <div class="capitalize text-lg font-bold">
+                            <a href="<%= `/estate/${estate.id}` %>" class="text-link">
+                              <%= estate.name %>
+                            </a>
                           </div>
+                        </div>
                         </div>
                       </div>
                     </td>
@@ -105,8 +111,19 @@
                     <td class="px-6 py-4 whitespace-nowrap">
                       <div class="text-lg text-gray-900"><%= estate.country %></div>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <img class="img-estate" src="<%= estates[estates.length -1].photos[0] %>" alt="photo estate"> <pre><% estates %></pre>
+                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                      <% if ((typeof estate.photos !== 'undefined') && estate.photos.length > 1) { %>
+                        <img class="img-estate mx-auto" src="<%= estate.photos[0] %>" alt="photo estate">
+                        <span class="text-xs rounded-full bg-indigo-100 text-indigo-600 p-3">
+                          <span class="text-2xl mr-1"><%= estate.photos.length %></span> 
+                            photos
+                        </span>
+                      <% } else if( (typeof estate.photos !== 'undefined') && estate.photos.length === 1) { %>
+                        <img class="img-estate mx-auto" src="<%= estate.photos[0] %>" alt="photo estate">
+                      <% } else { %>
+                        <span class="flex items-center px-2 text-gray-500">Aucune photo actuellement</span>
+                      <% } %>
+                      <!-- <img class="img-estate" src="<%= estates[estates.length -1].photos[0] %>" alt="photo estate"> <pre><% estates %></pre> -->
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <a href="/admin/edit-estate/<%= estate._id %>">
@@ -118,6 +135,7 @@
                         <button class="btn-red">Supprimer</button>
                       </a>
                     </td>
+                    
                   </tr>
                 <%}%>
               <%} else { %>

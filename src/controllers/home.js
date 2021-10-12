@@ -9,12 +9,14 @@ exports.getEstates = async (req, res, next) => {
     res.render('homepage.ejs', {
       message,
       estates,
-      title
+      title,
+      layout: './layouts/guest-layout'
     });
     // res.render('homepage.ejs', { estates: estates })
 }
 
 exports.showEstate = async (req, res) => {
     const estate = await Estate.findOne({ _id: req.params.id });
-    res.status(302).render("estates/estate", {estate})
+    const title = "Description estate"
+    res.status(302).render("estates/estate", {estate, title})
 }
