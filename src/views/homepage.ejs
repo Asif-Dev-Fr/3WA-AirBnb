@@ -8,11 +8,11 @@
       <% if (typeof currentUser !== 'undefined') {const isAdmin = currentUser.role === 'admin'} %>
   <h3>
     <% if (estates.length > 0 && typeof currentUser === 'undefined') { %>
-      <div class="flex justify-between mt-10">
+      <div class="flex mt-10">
         <ul class="text-xl mr-12">
           <%for (let estate of estates){ %>
-            <a href="<%= `/estate/${estate.id}` %>">
-            <li class="flex items-center mt-8">
+            <a href="<%= `/estate/${estate.id}` %>" class="p2 mt-8 block hover:bg-gray-100 hover:text-indigo-500">
+            <li class="flex items-center">
               <div class="pa-2 my-2">
                 <h2 class="text-3xl flex items-center"><%= estate.name %></h2>
                 <div class="font-bold my-1 text-indigo-600"><%= estate.price %> €</div>
@@ -20,15 +20,15 @@
               </div>
               
               <% if ((typeof estate.photos !== 'undefined') && estate.photos.length > 1) { %>
-                <img class="img-estate" src="<%= estate.photos[0] %>" alt="photo estate">
-                <span class="text-xs rounded-full bg-indigo-100 text-indigo-600 p-2 flex items-center">
+                <img class="img-estate ml-11" src="<%= estate.photos[0] %>" alt="photo estate">
+                <span class="text-xs rounded-full bg-indigo-100 text-indigo-600 p-2 flex items-center ml-11">
                   <span class="text-2xl mr-1"><%= estate.photos.length %></span> 
                     photos dispo
                 </span>
               <% } else if( (typeof estate.photos !== 'undefined') && estate.photos.length === 1) { %>
-                <img class="img-estate" src="<%= estate.photos[0] %>" alt="photo estate">
+                <img class="img-estate ml-11" src="<%= estate.photos[0] %>" alt="photo estate">
               <% } else { %>
-                <span class="flex items-center px-2 text-gray-500">Aucune photo actuellement</span>
+                <span class="flex items-center px-2 text-gray-500 ml-11">Aucune photo actuellement</span>
                 <% } %>
               
               <!-- <div style="display: flex; flex-direction: row; justify-content: center">
@@ -89,7 +89,7 @@
             <tbody class="bg-white divide-y divide-gray-200">
               <% if (estates.length >0) { %>
                 <%for (let estate of estates){ %>
-                  <tr>
+                  <tr class="hover:bg-gray-100">
                     <td class="px-6 py-4 whitespace-nowrap">
                       <div class="flex items-center">
                         <div class="ml-4">

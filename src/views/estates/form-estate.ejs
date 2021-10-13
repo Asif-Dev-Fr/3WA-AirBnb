@@ -33,7 +33,7 @@
       <div>
           <% if (!isEdit) { %>
     <h1>Add estate ejs</h1>
-    <form id="form" enctype="multipart/form-data">
+    <form id="form" method="POST" action="/admin/add-estate"> enctype="multipart/form-data">
       <div class="my-2">
         <input class="input" name="name" type="text" id="name" placeholder="Libellé" />
         <input class="input" name="price" type="number" id="price" placeholder="Prix" />

@@ -2,6 +2,7 @@ const Estate = require('../models/Estate');
 const axios = require('axios');
 
 exports.addEstate = async (req, res, next) => {
+    console.log("🚀 ~ file: estates.js ~ line 5 ~ exports.addEstate= ~ req", req)
     let lat;
     let lng;
     let name = req.body.name;
@@ -26,7 +27,7 @@ exports.addEstate = async (req, res, next) => {
     };
 
     const newEstate = {name, address, price, zipCode, country, lat, lng, photos};
-    console.log(newEstate);
+    console.log({newEstate});
 
     const estate = await new Estate(newEstate)
     estate.save()
