@@ -1,9 +1,9 @@
 const express = require('express');
 const {addBooking, allBooking} = require("../controllers/booking");
-const {setUpProfile} = require("../middlewares/authMiddleware");
+const {isAuth} = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 
-router.post("/estate/:id", setUpProfile, addBooking);
+router.post("/estate/:id", isAuth, addBooking);
 
 module.exports = router
