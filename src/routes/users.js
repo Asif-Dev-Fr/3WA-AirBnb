@@ -1,6 +1,7 @@
 const express = require("express");
 
 const { register, login } = require("../controllers/users");
+const {allBooking} = require("../controllers/booking");
 const upload = require("../utils/multer-init");
 const {isAuth, isAdmin} = require("../middlewares/authMiddleware")
 const router = express.Router();
@@ -37,5 +38,11 @@ router.get('/protected', (req, res, next) => {
 router.get('/admin-route', isAuth, isAdmin, (req, res, next) => {
   res.send('You made it to the admin route')
 })
+
+router.get('/profile', isAuth, (req, res, next) => {
+  res.render('users/profile')
+})
+
+router.get("/bookings", isAuth, allBooking);
 
 module.exports = router;

@@ -15,4 +15,6 @@ router.get("/delete-estate/:id", removeEstate);
 router.get("/edit-estate/:id", editEstate);
 router.post("/update-estate/:id", updateEstate);
 
+// router.get("/show/:id", updateEstate);
+
 module.exports = router;

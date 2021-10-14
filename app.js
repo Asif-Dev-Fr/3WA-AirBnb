@@ -13,9 +13,11 @@ require("dotenv").config();
 
 // Routes imports
 const homepageRouter = require("./src/routes/home");
-const estatesRouter = require("./src/routes/estates");
+const estatesAdminRouter = require("./src/routes/estates-admin-router");
 const usersRouter = require("./src/routes/users");
-const apiRouter = require("./src/routes/api")
+const apiRouter = require("./src/routes/api");
+const estateRouter = require("./src/routes/estate");
+const bookingRouter = require("./src/routes/booking");
 
 // Constant
 const PORT = 3000;
@@ -66,9 +68,11 @@ app.use(flash());
  * ---------- ROUTES ----------
  */
 app.use('/', homepageRouter);
-app.use("/admin", estatesRouter);
+app.use("/admin", estatesAdminRouter);
+app.use("/estate", estateRouter);
 app.use("/user", usersRouter);
 app.use("/api", apiRouter);
+app.use("/booking", bookingRouter);
 
 /**
  * ---------- SERVER LISTENNING ----------

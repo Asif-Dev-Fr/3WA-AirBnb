@@ -12,7 +12,7 @@
       rel="stylesheet"
     />
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
-    
+
 
     <title><%= title %></title>
   </head>
@@ -28,6 +28,7 @@
       <% } %>
       <% if(typeof currentUser !== 'undefined') { %>
         <a href="/user/profile">mon profile</a>
+        <a href="/user/bookings">mes voyages</a>
       <% } %>
     </nav>
     <h1>Bienvenue dans votre site de réservation</h1>

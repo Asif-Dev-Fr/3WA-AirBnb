@@ -46,5 +46,9 @@ exports.updateEstate = async (req, res) => {
     res.status(302).redirect('/');
 }
 
+exports.showEstate = async (req, res) => {
+    const estate = await Estate.findOne({ _id: req.params.id });
+    res.status(302).render("estates/estate", {estate})
+}
 
 
