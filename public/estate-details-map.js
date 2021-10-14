@@ -13,7 +13,6 @@ const initMap = async () => {
 
     const data = await fetch("http://localhost:3000/api/estates");
     const estates = await data.json();
-    console.log(estates);
 
     // Create a new marker.
     const marker = new mapboxgl.Marker({
