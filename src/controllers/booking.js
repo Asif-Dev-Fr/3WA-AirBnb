@@ -1,5 +1,4 @@
 const Booking = require('../models/Booking');
-const Estate = require('../models/Estate');
 
 exports.addBooking = async (req, res, next) => {
   const booking = await new Booking({
@@ -12,8 +11,9 @@ exports.addBooking = async (req, res, next) => {
 
 exports.allBooking = async (req, res, next) => {
   // const bookings = Booking.find().populate({ path: '_estate', model: Estate });
-  const bookings = Booking.find({_user: res.locals.currentUser._id})
-  console.log(bookings);
+  console.log(res.locals.currentUser);
+  // const bookings = Booking.find({_user: res.locals.currentUser._id})
+  // console.log(bookings);
   res.end()
   // let message = req.flash();
   // res.render('bookings.ejs', {
