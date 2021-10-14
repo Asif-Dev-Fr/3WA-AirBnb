@@ -19,7 +19,6 @@ exports.isAuth = (req, res, next) => {
 }
 
 exports.isAdmin = (req, res, next) => {
-  console.log(res.locals.currentUser);
   if(res.locals.currentUser && res.locals.currentUser.role === 'admin'){
     try {
       next()
