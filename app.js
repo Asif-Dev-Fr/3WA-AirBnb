@@ -7,6 +7,8 @@ const session = require("express-session")
 const MongoStore = require('connect-mongo');
 const mongoose = require("mongoose");
 const app = express();
+const cookieParser = require('cookie-parser');
+
 require("dotenv").config();
 
 // Routes imports
@@ -39,18 +41,14 @@ app.use(session({
   cookie: { maxAge: 1000 * 60 * 60 * 24 },
   store: MongoStore.create({mongoUrl: process.env.CONNECTION_URL, collectionName: "sessions"})
 }));
-app.use((req, res, next) => {
-  next();
-})
+app.use(cookieParser());
 
 /**
  * ---------- PASSEPORT AUTHENTICATION ----------
  */
 
-// Require the entire Passport config module so app.js knows about it
-require('./src/config/passport');
+// Pass the global passport object into the configuration function
 app.use(passport.initialize());
-app.use(passport.session());
 
 /**
  * ---------- MONGOOSE CONNECTION ----------

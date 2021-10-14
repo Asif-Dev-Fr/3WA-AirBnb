@@ -13,6 +13,9 @@ const initMap = async () => {
 
   const data = await fetch("http://localhost:3000/api/estates");
   const estates = await data.json();
+
+  let latitude;
+  let longitude;
   for (const { lat, lng, name, address, zipCode, price, _id } of estates) {
     // make a marker for each feature and add to the map
     latitude = lat;
