@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const crypto = require('crypto');
 const jsonwebtoken = require('jsonwebtoken');
 
 const pathToKey = path.join(__dirname, '..', 'id_rsa_priv.pem');
@@ -12,15 +11,17 @@ const issueJWT = (user) => {
   const expiresIn = '1d';
 
   const payload = {
-    sub: _id,
+    id: _id,
+    firstName: user.firstName,
+    role: user.role,
+    email: user.email,
     iat: Date.now()
   }
 
-  const signedToken = jsonwebtoken.sign(payload, PRIV_KEY, {expiresIn: expiresIn, algorithm: 'RS256'})
+  const signedToken = jsonwebtoken.sign(payload, PRIV_KEY, {expiresIn: expiresIn})
 
   return {
-    token: 'Bearer ' + signedToken,
-    expires: expiresIn
+    token: signedToken
   }
 }
 

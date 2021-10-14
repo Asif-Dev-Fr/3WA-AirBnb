@@ -1,10 +1,8 @@
 const express = require("express");
-const passport = require('passport');
 
 const { register, login } = require("../controllers/users");
 const upload = require("../utils/multer-init");
-const {isAuth,isAdmin,setUpProfile} = require("../middlewares/authMiddleware")
-// require('../config/passport')(passport)
+const {isAuth, isAdmin} = require("../middlewares/authMiddleware")
 const router = express.Router();
 
 router.get("/register", (req, res) => {
@@ -12,11 +10,9 @@ router.get("/register", (req, res) => {
   res.render("users/form-register", {
     message: message,
   });
-  // res.render("users/form-register");
 });
 
 router.post("/register", upload.single("avatar"), register);
-
 
 router.get("/login", (req, res) => {
   let message = req.flash();
@@ -26,28 +22,20 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", login);
-// router.post("/login", passport.authenticate("jwt"), login);
 
 router.get("/logout", (req, res) => {
   req.logOut();
-  res.locals.user = null;
+  res.locals.currentUser = null;
+  res.clearCookie('Token');
   res.redirect('/');
 })
 
-router.get('/protected', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-  console.log('protected route');
-  res.status(200).json({success: true, msg: "authorize you are"})
+router.get('/protected', (req, res, next) => {
+  res.status(200).json({success: true, msg: "you are authorize"})
 })
-// router.get('/protected-route', isAuth, setUpProfile, (req, res, next) => {
-//   res.send('You made it to the protected route')
-// })
 
 router.get('/admin-route', isAuth, isAdmin, (req, res, next) => {
   res.send('You made it to the admin route')
-})
-
-router.get('/profile', setUpProfile, (req, res, next) => {
-  res.render('users/profile')
 })
 
 module.exports = router;

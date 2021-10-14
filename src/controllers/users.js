@@ -4,73 +4,6 @@ const issueJWT = require("../utils/jsw-utils")
 
 const User = require('../models/User');
 
-// * LOGIC WITH LOCAL STRATEGY
-// exports.register = async (req, res) => {
-//   const validation = registerValidation(req.body);
-
-//   // Validation of data before creating a new user :
-//   if (validation.error) {
-//     req.flash('error', validation.error.details[0].message);
-//     return res.redirect('/user/register');
-//   }
-
-//   // Checking if the user is already in the database
-// 	const emailExist = await User.findOne({ email: req.body.email });
-// 	if (emailExist) {
-//     req.flash('error', 'email already used');
-//     return res.redirect('/user/register');
-//   }
-
-//   //Hash password
-//   const hashedPassword = await hashPassword(req.body.password);
-
-//   const user = await new User({
-//     ...req.body,
-//     password: hashedPassword,
-//     avatar: typeof req.file === 'undefined' ? '' : req.file.path
-//   });
-//   user.save();
-
-// 	req.flash('success', 'Your register successfully');
-//   res.status(302).redirect('/user/login');
-// };
-
-// exports.login = async (req, res) => {
-//   // Checking if the email exists in the database :
-//   const userData = await User.findOne({ email: req.body.email });
-
-// 	if (!userData) {
-//     req.flash('error', "Email doesn't exist");
-//     return res.redirect('/user/register');
-//   }
-
-// 	const validation = loginValidation(req.body);
-// 	if (validation.error) {
-//     req.flash('error', validation.error.details[0].message);
-//     return res.redirect('/user/login');
-//   }
-
-//   // Check if password is correct :
-//   const validPass = await validatePassword(
-//     req.body.password,
-//     userData.password
-//   );
-
-// 	if (!validPass) {
-//     req.flash('error', "Invalid password");
-//     return res.redirect('/user/login');
-//   }
-
-//   if (req.isAuthenticated()) {
-//     res.status(302).redirect('/');
-//     // res.status(302).redirect('/user/protected-route');
-//   } else {
-//     res.status(302).redirect('/user/login');
-//   }
-// };
-
-
-// * JWT LOGIC
 exports.register = async (req, res, next) => {
   const validation = registerValidation(req.body);
 
@@ -100,13 +33,11 @@ exports.register = async (req, res, next) => {
         const jwt = issueJWT(user)
         console.log('from register', jwt);
         req.flash('success', 'Your register successfully');
-        // res.json({success: true, user: user, token: jwt.token, expiresIn: jwt.expires })
         res.status(302).redirect('/user/login');
       })
       .catch(err => next(err));
 
 	req.flash('success', 'Your register successfully');
-  // res.status(302).redirect('/user/login');
 };
 
 exports.login = async (req, res) => {
@@ -137,19 +68,10 @@ exports.login = async (req, res) => {
 
   if(validPass) {
     const tokenObject = issueJWT(userData)
-    // console.log('from login',tokenObject);
-    console.log('tokenObject',tokenObject);
-    // res.status(302).json({success: true, user: userData, token: tokenObject.token, expiresIn: tokenObject.expires});
+    res.cookie('Token', tokenObject.token)
     res.status(302).redirect('/');
   } else {
-    // res.status(404).json({success: true, msg: 'wrong pass'});
     res.status(302).redirect('/user/login');
   }
-  // if (req.isAuthenticated()) {
-  //   res.status(302).redirect('/');
-  //   // res.status(302).redirect('/user/protected-route');
-  // } else {
-  //   res.status(302).redirect('/user/login');
-  // }
 };
 

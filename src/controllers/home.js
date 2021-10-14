@@ -7,7 +7,6 @@ exports.getEstates = async (req, res, next) => {
       message: message,
       estates: estates
     });
-    // res.render('homepage.ejs', { estates: estates })
 }
 
 exports.showEstate = async (req, res) => {
