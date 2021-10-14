@@ -31,7 +31,6 @@ exports.register = async (req, res, next) => {
   user.save()
       .then((user) => {
         const jwt = issueJWT(user)
-        console.log('from register', jwt);
         req.flash('success', 'Your register successfully');
         res.status(302).redirect('/user/login');
       })
