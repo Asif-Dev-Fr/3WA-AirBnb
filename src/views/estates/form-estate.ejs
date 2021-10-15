@@ -64,25 +64,19 @@
           const fullAddress = document.querySelector(
             ".mapboxgl-ctrl-geocoder--input"
           ).value;
+          const formData = new FormData(form);
           const photos = document.getElementById("photos");
           const files = Array.from(photos.files);
           const allPhotos = files.map((photo) => {
-            return 'upload/' + photo.name
+            return 'upload/estate-photos/' + photo.name
           })
 
-          const obj = JSON.stringify({
-            name,
-            price,
-            fullAddress,
-            allPhotos
-          });
+          allPhotos.forEach( p => formData.append('photos', p));
+          formData.append('address', fullAddress);
 
           await fetch("http://localhost:3000/admin/add-estate", {
             method: "POST",
-            body: obj,
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-            },
+            body: formData
           });
           window.location.replace("http://localhost:3000/");
         });

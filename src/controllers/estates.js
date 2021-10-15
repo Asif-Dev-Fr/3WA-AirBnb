@@ -2,6 +2,7 @@ const Estate = require('../models/Estate');
 const axios = require('axios');
 
 exports.addEstate = async (req, res, next) => {
+  console.log('---------------------ESTATE-----------------');
   let lat;
   let lng;
   let name = req.body.name;
@@ -9,10 +10,10 @@ exports.addEstate = async (req, res, next) => {
   let address;
   let zipCode;
   let country;
-  let photos = req.body.allPhotos;
+  let photos = req.body.photos;
 
   const fetch = await axios.get(
-    `https://api.mapbox.com/geocoding/v5/mapbox.places/${req.body.fullAddress}.json?access_token=${process.env.MAPBOX_TOKEN}&limit=1`
+    `https://api.mapbox.com/geocoding/v5/mapbox.places/${req.body.address}.json?access_token=${process.env.MAPBOX_TOKEN}&limit=1`
   );
 
   if (fetch.data.features[0] && fetch.data.features[0].geometry.coordinates[0])
