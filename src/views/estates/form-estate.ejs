@@ -33,7 +33,7 @@
       <div>
           <% if (!isEdit) { %>
     <h1>Add estate ejs</h1>
-    <form id="form" method="POST" action="/admin/add-estate"> enctype="multipart/form-data">
+    <form id="form" method="POST" action="/admin/add-estate" enctype="multipart/form-data"> >
       <div class="my-2">
         <input class="input" name="name" type="text" id="name" placeholder="Libellé" />
         <input class="input" name="price" type="number" id="price" placeholder="Prix" />
@@ -89,7 +89,59 @@
     </div>
     
     </div>
-    
+    <script>
+      
+      const form = document.getElementById("form");
+      if (form) {
+        
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          
+
+          const name = document.getElementById("name").value;
+          const price = document.getElementById("price").value;
+          const fullAddress = document.querySelector(
+            ".mapboxgl-ctrl-geocoder--input"
+          ).value;
+
+          /* document.querySelector(
+            ".mapboxgl-ctrl-geocoder--input"
+          ).setAttribute('name', 'address') */
+          const formData = new FormData(form);
+          const photos = document.getElementById("photos");
+          const files = Array.from(photos.files);
+          const allPhotos = files.map((photo) => {
+            return 'upload/estate-photos/' + photo.name
+          })
+
+          /* const obj = JSON.stringify({
+            name,
+            price,
+            fullAddress,
+            allPhotos
+          }); */
+
+          
+          allPhotos.forEach( p => formData.append('photos', p))
+
+          formData.append('address', "1 rue la bruyère 93800")
+
+          // formData.append(name)
+          // formData.append(price)
+          // formData.append('address', fullAddress)
+          // formData.append('photos', allPhotos)
+          // console.log("🚀 ~ file: form-estate.ejs ~ line 122 ~ form.addEventListener ~ formData", formData)
+
+          console.log("🚀 ~ file: form-estate.ejs ~ line 117 ~ form.addEventListener ~ formData", formData)
+          console.log("🚀 ~ file: form-estate.ejs ~ line 117 ~ form.addEventListener ~ formData ALL", formData.getAll('address'))
+          await fetch("http://localhost:3000/admin/add-estate", {
+            method: "POST",
+            body: formData,
+          });
+          // window.location.replace("http://localhost:3000/");
+        });
+      }
+    </script>
 
     
     

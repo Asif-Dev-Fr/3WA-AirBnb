@@ -1,7 +1,6 @@
 const Estate = require('../models/Estate')
 
 exports.getEstates = async (req, res, next) => {
-  // console.log("home " + req.user.firstName);
     const estates = await Estate.find();
     const title = 'Accueil';
     let message = req.flash();
@@ -12,7 +11,6 @@ exports.getEstates = async (req, res, next) => {
       title,
       layout: './layouts/guest-layout'
     });
-    // res.render('homepage.ejs', { estates: estates })
 }
 
 exports.showEstate = async (req, res) => {

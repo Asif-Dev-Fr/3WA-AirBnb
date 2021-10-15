@@ -1,29 +1,31 @@
-const User = require('../models/User');
+const path = require('path');
+const fs = require('fs');
+const jsonwebtoken = require('jsonwebtoken');
+const pathToKey = path.join(__dirname, '..', 'id_rsa_priv.pem');
+const PRIV_KEY = fs.readFileSync(pathToKey, 'utf8');
 
 exports.isAuth = (req, res, next) => {
-  // next()
-  if(req.isAuthenticated()) {
-    res.locals.currentUser = req.user
-    next();
+  if(req.cookies.Token){
+    try {
+      const {id, firstName, role, email} = jsonwebtoken.verify(req.cookies.Token, PRIV_KEY)
+      res.locals.currentUser = { id, firstName, role, email }
+      next()
+    } catch(err) {
+      res.status(401).json({msg: `Error: ${err}`})
+    }
   } else {
-    res.status(401).json({msg: 'You are not authorize to view this resource'})
+    next()
   }
 }
 
 exports.isAdmin = (req, res, next) => {
-  if(req.isAuthenticated() && req.user.role == 'admin') {
-    res.locals.currentUser = req.user
-    next();
+  if(res.locals.currentUser && res.locals.currentUser.role === 'admin'){
+    try {
+      next()
+    } catch(err) {
+      res.status(401).json({msg: `Error: ${err}`})
+    }
   } else {
     res.status(401).json({msg: 'You are not authorize to view this resource because your not an admin'})
-  }
-}
-
-exports.setUpProfile = async (req, res, next) => {
-  if(req.session.passport && !req.session.passport.user){
-    next();
-  } else {
-    res.locals.currentUser = req.user
-    next();
   }
 }

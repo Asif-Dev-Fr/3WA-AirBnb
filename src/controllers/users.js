@@ -1,9 +1,10 @@
 const { hashPassword, validatePassword } = require('../utils/password-utils');
 const { registerValidation, loginValidation } = require('../validation/validation');
+const issueJWT = require("../utils/jsw-utils")
 
 const User = require('../models/User');
 
-exports.register = async (req, res) => {
+exports.register = async (req, res, next) => {
   const validation = registerValidation(req.body);
 
   // Validation of data before creating a new user :
@@ -21,16 +22,24 @@ exports.register = async (req, res) => {
 
   //Hash password
   const hashedPassword = await hashPassword(req.body.password);
-
+  console.log("🚀 ~ file: users.js ~ line 32 ~ exports.register= ~ req.file.path", req.file.path)
+  console.log("🚀 ~ file: users.js ~ line 32 ~ exports.register= ~ substring req.file.path", req.file.path.substring(7))
   const user = await new User({
     ...req.body,
     password: hashedPassword,
-    avatar: typeof req.file === 'undefined' ? '' : req.file.path
+    // strip '/public/' inherit from multer
+    avatar: typeof req.file === 'undefined' ? '' : req.file.path.substring(7)
   });
-  user.save();
+  user.save()
+      .then((user) => {
+        const jwt = issueJWT(user)
+        req.flash('success', 'Your register successfully');
+        res.status(302).redirect('/user/login');
+      })
+      .catch(err => next(err));
 
 	req.flash('success', 'Your register successfully');
-  res.status(302).redirect('/user/login');
+  res.status(200).send("SUCCES ENREGISTREMENT")
 };
 
 exports.login = async (req, res) => {
@@ -59,10 +68,12 @@ exports.login = async (req, res) => {
     return res.redirect('/user/login');
   }
 
-  if (req.isAuthenticated()) {
+  if(validPass) {
+    const tokenObject = issueJWT(userData)
+    res.cookie('Token', tokenObject.token)
     res.status(302).redirect('/');
-    // res.status(302).redirect('/user/protected-route');
   } else {
     res.status(302).redirect('/user/login');
   }
 };
+
