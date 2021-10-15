@@ -55,22 +55,23 @@
     <script src="/autocomplete.js"></script>
     <script>
       const form = document.getElementById("form");
+
       if (form) {
         form.addEventListener("submit", async (e) => {
           e.preventDefault();
-
-          const name = document.getElementById("name").value;
-          const price = document.getElementById("price").value;
+          // const name = document.getElementById("name").value;
+          // const price = document.getElementById("price").value;
           const fullAddress = document.querySelector(
             ".mapboxgl-ctrl-geocoder--input"
           ).value;
-          const formData = new FormData(form);
+
           const photos = document.getElementById("photos");
           const files = Array.from(photos.files);
           const allPhotos = files.map((photo) => {
             return 'upload/estate-photos/' + photo.name
           })
 
+          const formData = new FormData(form);
           allPhotos.forEach( p => formData.append('photos', p));
           formData.append('address', fullAddress);
 

@@ -4,7 +4,7 @@ const storage = multer.diskStorage({
 
 
   destination: (req, file, cb) => {
-    console.log('MULTER----------------------',req);
+    console.log('MULTER----------------------');
 
     if(file.fieldname === 'avatar') {
       cb(null, 'public/upload/avatar')
