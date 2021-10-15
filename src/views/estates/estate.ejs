@@ -12,7 +12,7 @@
       rel="stylesheet"
     />
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
-    
+
 
     <title><%= title %></title>
   </head>
@@ -35,6 +35,19 @@
         ></div>
       </div>
     </div>
+    <h2>BOOK THE FLAT</h2>
+    <% if(typeof currentUser !== 'undefined') { %>
+      <form method="POST" action="/booking/estate/<%= estate._id %>">
+        <input name="_estate" type="hidden" value="<%= estate.id %>">
+        <input name="_user" type="hidden" value="<%= currentUser.id %>">
+        <input type="date" name="start_date" id="start_date">
+        <input type="date" name="end_date" id="end_date">
+        <button>Send</button>
+      </form>
+    <% } else { %>
+      <!-- Please coonect to book -->
+      <h3>Please coonect to book</h3>
+    <% } %>
 
     <script src="/map.js"></script>
   </body>

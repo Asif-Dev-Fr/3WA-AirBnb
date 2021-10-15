@@ -7,13 +7,17 @@ const session = require("express-session")
 const MongoStore = require('connect-mongo');
 const mongoose = require("mongoose");
 const app = express();
+const cookieParser = require('cookie-parser');
+
 require("dotenv").config();
 
 // Routes imports
 const homepageRouter = require("./src/routes/home");
-const estatesRouter = require("./src/routes/estates");
+const estatesAdminRouter = require("./src/routes/estates-admin-router");
 const usersRouter = require("./src/routes/users");
-const apiRouter = require("./src/routes/api")
+const apiRouter = require("./src/routes/api");
+const estateRouter = require("./src/routes/estate");
+const bookingRouter = require("./src/routes/booking");
 
 // Constant
 const PORT = 3000;
@@ -37,19 +41,14 @@ app.use(session({
   cookie: { maxAge: 1000 * 60 * 60 * 24 },
   store: MongoStore.create({mongoUrl: process.env.CONNECTION_URL, collectionName: "sessions"})
 }));
-app.use((req, res, next) => {
-  // console.log(res.app.locals);
-  next();
-})
+app.use(cookieParser());
 
 /**
  * ---------- PASSEPORT AUTHENTICATION ----------
  */
 
-// Require the entire Passport config module so app.js knows about it
-require('./src/config/passport');
+// Pass the global passport object into the configuration function
 app.use(passport.initialize());
-app.use(passport.session());
 
 /**
  * ---------- MONGOOSE CONNECTION ----------
@@ -69,9 +68,11 @@ app.use(flash());
  * ---------- ROUTES ----------
  */
 app.use('/', homepageRouter);
-app.use("/admin", estatesRouter);
+app.use("/admin", estatesAdminRouter);
+app.use("/estate", estateRouter);
 app.use("/user", usersRouter);
-app.use("/api", apiRouter)
+app.use("/api", apiRouter);
+app.use("/booking", bookingRouter);
 
 /**
  * ---------- SERVER LISTENNING ----------
