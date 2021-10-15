@@ -1,0 +1,17 @@
+<% title="Connexion" %>
+<%- include('../partials/head', {title}); %>
+
+  <body>
+    <%- include('../partials/flash-message'); %>
+    <h1>Enregistrement</h1>
+    <% bookings.forEach((booking) => {  %>
+      <p><%= booking._estate.address %></p>
+      <p><%= booking._estate.price %></p>
+      <ul>
+        <% booking._estate.photos.forEach(photo => { %>
+        <li><%= photo %></li>
+        <% }) %>
+      </ul>
+    <% }) %>
+  </body>
+</html>
