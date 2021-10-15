@@ -26,7 +26,7 @@ exports.register = async (req, res, next) => {
   const user = await new User({
     ...req.body,
     password: hashedPassword,
-    avatar: typeof req.file === 'undefined' ? '' : req.file.path
+    avatar: typeof req.file === 'undefined' ? '' : `upload/${req.file.filename}`
   });
   user.save()
       .then((user) => {
